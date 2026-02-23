@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Ebenezer Imani Nursery & Primary School</title>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    
+    <!-- External Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <style>
+        /* Contact page specific styles - Updated */
+        /* Contact Hero */
+.contact-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('contact-banner.jpg') center/cover no-repeat;
+    color: #fff;
+    text-align: center;
+    padding: 80px 20px;
+    border-bottom: 5px solid #f4c542; /* accent color */
+}
+
+.contact-hero h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.contact-hero h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #f4c542; /* highlight color */
+}
+
+.contact-hero p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .contact-hero h1 {
+        font-size: 2.2rem;
+    }
+    .contact-hero h2 {
+        font-size: 1.6rem;
+    }
+    .contact-hero p {
+        font-size: 1rem;
+    }
+}
+
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .contact-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+        }
+        
+        .contact-form-container {
+            background: white;
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin: 50px 0;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .required::after {
+            content: " *";
+            color: var(--secondary-color);
+        }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+        
+        textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-methods {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+        
+        .message-type-info {
+            background: #f0f9ff;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .message-type-info p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+        
+        .message-type-info i {
+            color: #3b82f6;
+            margin-right: 8px;
+        }
+        
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .staff-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+        
+        .staff-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .staff-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .staff-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .staff-card:hover .staff-image img {
+            transform: scale(1.05);
+        }
+        
+        .staff-info {
+            padding: 25px;
+        }
+        
+        .staff-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .staff-position {
+            color: var(--secondary-color);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .staff-contact {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .staff-contact p {
+            margin: 5px 0;
+            font-size: 0.9rem;
+        }
+        
+        .staff-contact i {
+            color: var(--primary-color);
+            margin-right: 10px;
+            width: 20px;
+        }
+        
+        .map-container {
+            margin: 50px 0;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            height: 500px;
+            position: relative;
+        }
+        
+        #schoolMap {
+            width: 100%;
+            height: 100%;
+            border-radius: var(--border-radius-lg);
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            max-width: 300px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        
+        .map-overlay h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .map-overlay p {
+            font-size: 0.9rem;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        .directions {
+            background: #f8fafc;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin: 30px 0;
+        }
+        
+        .direction-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .direction-step {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .step-number {
+            background: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .faq-section {
+            margin: 50px 0;
+        }
+        
+        .faq-container {
+            margin-top: 30px;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+        
+        .business-hours {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin: 30px 0;
+        }
+        
+        .hours-table {
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .hours-table tr {
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .hours-table td {
+            padding: 12px 0;
+        }
+        
+        .hours-table td:first-child {
+            font-weight: 500;
+        }
+        
+        .hours-table .closed {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+        
+        .emergency-contact {
+            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            margin: 30px 0;
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        .social-contact {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #f1f5f9;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            color: var(--dark-color);
+            transition: var(--transition);
+        }
+        
+        .social-link:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        /* Success/Error Messages */
+        .message {
+            padding: 15px;
+            border-radius: var(--border-radius);
+            margin: 15px 0;
+            display: none;
+        }
+        
+        .message.success {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .message.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        
+        .message.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border: 1px solid #bfdbfe;
+        }
+        
+        /* Loading spinner */
+        .spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            margin: 0 auto;
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Direct contact buttons */
+        .direct-contact-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .direct-contact-btn {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .direct-contact-btn.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .direct-contact-btn.whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+        
+        .direct-contact-btn.email {
+            background: #EA4335;
+            color: white;
+        }
+        
+        .direct-contact-btn.email:hover {
+            background: #D14836;
+            transform: translateY(-2px);
+        }
+        
+        .direct-contact-btn.phone {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .direct-contact-btn.phone:hover {
+            background: #1e40af;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 768px) {
+            .contact-form-container {
+                padding: 25px;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .direct-contact-buttons {
+                flex-direction: column;
+            }
+            
+            .direct-contact-btn {
+                width: 100%;
+            }
+            
+            .map-container {
+                height: 400px;
+            }
+            
+            .map-overlay {
+                position: relative;
+                top: 0;
+                left: 0;
+                max-width: 100%;
+                margin: 20px;
+                background: white;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .map-container {
+                height: 350px;
+            }
+        }
+        
+        /* Custom marker animation */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/sch logo.jfif" alt="Ebenezer Imani Logo">
+                <div class="school-name">
+                    <h1>Ebenezer Imani</h1>
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="academics.html"><i class="fas fa-graduation-cap"></i> Academics</a></li>
+                    <li><a href="admissions.html"><i class="fas fa-user-plus"></i> Admissions</a></li>
+                    <li><a href="fees.html"><i class="fas fa-money-check-alt"></i> Fees</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-photo-video"></i> Gallery</a></li>
+                    <li><a href="contact.html" class="active"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Ebenezer Imani Nursery & Primary School</h1>
+                    <p class="motto">Thriving on Unity</p>
+            <h2>Contact Us</h2>
+            <p>We're here to help. Get in touch with us through any of the following channels.</p>
+        </div>
+    </section>
+
+    <!-- Contact Information -->
+    <section class="contact-info">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get in Touch</h2>
+                <p class="section-subtitle">Reach out to us through multiple channels. We're always ready to assist you.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Our Location</h3>
+                    <p>Kityabule - Namayiba<br>
+                       4 kilometers off Katosi Road<br>
+                       Mukono District, Uganda</p>
+                    <p><strong>P.O. Box:</strong> 4158, Kampala</p>
+                    <a href="#map" class="small-btn">View on Map</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Phone Numbers</h3>
+                    <p><strong>Office:</strong> +256 761288927</p>
+                    <p><strong>Mobile:</strong> 0773012774</p>
+                    <p><strong>Other:</strong> 0709624986</p>
+                    <a href="tel:+256773012774" class="small-btn">Call Now</a>
+                </div>
+                
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Address</h3>
+                    <p><strong>General Inquiries:</strong><br>ebenezerimanischool@gmail.com</p>
+                    <p><strong>Office Hours:</strong><br>Mon-Fri: 8:00 AM - 5:00 PM</p>
+                    <a href="mailto:ebenezerimanischool@gmail.com" class="small-btn">Send Email</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="contact-form-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Send Us a Message</h2>
+                <p class="section-subtitle">Choose how you'd like to contact us. Your message will be sent directly to the appropriate channel.</p>
+            </div>
+
+            <!-- Direct Contact Buttons -->
+            <div class="direct-contact-buttons">
+                <a href="https://wa.me/256773012774?text=Hello%20Ebenezer%20Imani%20School,%20I%20would%20like%20to%20inquire%20about:" 
+                   target="_blank" 
+                   class="direct-contact-btn whatsapp">
+                    <i class="fab fa-whatsapp"></i> Message on WhatsApp
+                </a>
+                <a href="mailto:ebenezerimanischool@gmail.com?subject=Inquiry%20from%20Website" 
+                   class="direct-contact-btn email">
+                    <i class="fas fa-envelope"></i> Send Email
+                </a>
+                <a href="tel:+256773012774" 
+                   class="direct-contact-btn phone">
+                    <i class="fas fa-phone"></i> Call Directly
+                </a>
+            </div>
+
+            <!-- Or use the form -->
+            <div class="message-type-info">
+                <p><i class="fas fa-info-circle"></i> <strong>OR fill the form below</strong> - We'll route your message to the appropriate contact method based on your selection.</p>
+                <p><i class="fas fa-check-circle"></i> WhatsApp messages go to: <strong>+256 773 012 774</strong></p>
+                <p><i class="fas fa-check-circle"></i> Emails go to: <strong>ebenezerimanischool@gmail.com</strong></p>
+                <p><i class="fas fa-check-circle"></i> Phone calls go to: <strong>+256 773 012 774</strong></p>
+            </div>
+
+            <div class="contact-form-container">
+                <div id="successMessage" class="message success" style="display: none;">
+                    <i class="fas fa-check-circle"></i> <span id="successText">Thank you for your message! We'll contact you soon.</span>
+                </div>
+                <div id="errorMessage" class="message error" style="display: none;">
+                    <i class="fas fa-exclamation-circle"></i> <span id="errorText">There was an error sending your message. Please try again.</span>
+                </div>
+                <div id="infoMessage" class="message info" style="display: none;">
+                    <i class="fas fa-info-circle"></i> <span id="infoText"></span>
+                </div>
+                
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name" class="required">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone" class="required">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" required placeholder="+256 XXX XXX XXX">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" class="required">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select Subject</option>
+                                <option value="admissions">Admissions Inquiry</option>
+                                <option value="fees">Fees & Payment</option>
+                                <option value="academics">Academic Matters</option>
+                                <option value="boarding">Boarding Section</option>
+                                <option value="employment">Employment Opportunities</option>
+                                <option value="partnership">Partnership & Sponsorship</option>
+                                <option value="other">Other Inquiry</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" class="required">Your Message</label>
+                        <textarea id="message" name="message" required placeholder="Please write your message here..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="required">How would you like us to respond?</label>
+                        <div class="contact-methods">
+                            <label class="checkbox-group">
+                                <input type="radio" name="responseMethod" value="whatsapp" required>
+                                <span><i class="fab fa-whatsapp" style="color: #25D366;"></i> WhatsApp Message</span>
+                            </label>
+                            <label class="checkbox-group">
+                                <input type="radio" name="responseMethod" value="email">
+                                <span><i class="fas fa-envelope" style="color: #EA4335;"></i> Email Response</span>
+                            </label>
+                            <label class="checkbox-group">
+                                <input type="radio" name="responseMethod" value="phone">
+                                <span><i class="fas fa-phone" style="color: var(--primary-color);"></i> Phone Call</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="checkbox-group">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <span>Subscribe to our newsletter for updates and announcements</span>
+                        </label>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="sendViaWhatsApp()">
+                            <i class="fab fa-whatsapp"></i> Send via WhatsApp
+                        </button>
+                        <button type="reset" class="btn btn-secondary">
+                            <i class="fas fa-redo"></i> Clear Form
+                        </button>
+                    </div>
+                    
+                    <div class="spinner" id="loadingSpinner"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rest of the page remains the same -->
+    <!-- Key Staff Contacts -->
+    <section class="staff-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Key Staff Contacts</h2>
+                <p class="section-subtitle">Contact our key staff members directly for specific inquiries.</p>
+            </div>
+
+            <div class="staff-grid">
+                <div class="staff-card">
+                    <div class="staff-image">
+                        <img src="images/staff/headteacher.jpg" alt="Head Teacher" onerror="this.src='https://via.placeholder.com/400x300/f0f4f8/1e3a8a?text=Head+Teacher'">
+                    </div>
+                    <div class="staff-info">
+                        <div class="staff-name">Director</div>
+                        <div class="staff-position">School Administration</div>
+                        <p>Overall school administration and academic leadership.</p>
+                        <div class="staff-contact">
+                            <p><i class="fas fa-phone"></i> +256 773 012 774</p>
+                            <p><i class="fas fa-clock"></i> Available: Mon-Fri, 8AM-5PM</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="staff-card">
+                    <div class="staff-image">
+                        <img src="images/staff/deputy.jpg" alt="Deputy Head Teacher" onerror="this.src='https://via.placeholder.com/400x300/f0f4f8/1e3a8a?text=Deputy+Head'">
+                    </div>
+                    <div class="staff-info">
+                        <div class="staff-name">Head Teacher</div>
+                        <div class="staff-position">Academic Coordination</div>
+                        <p>Overall school administration and academic leadership.</p>
+                        <div class="staff-contact">
+                            <p><i class="fas fa-phone"></i> 0709624986</p>
+                            <p><i class="fas fa-clock"></i> Available: Mon-Fri, 8AM-5PM</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="staff-card">
+                    <div class="staff-image">
+                        <img src="images/staff/bursar.jpg" alt="School Bursar" onerror="this.src='https://via.placeholder.com/400x300/f0f4f8/1e3a8a?text=School+Bursar'">
+                    </div>
+                    <div class="staff-info">
+                        <div class="staff-name">School Bursar</div>
+                        <div class="staff-position">Financial Matters</div>
+                        <p>Fees payments, accounts, and financial matters.</p>
+                        <div class="staff-contact">
+                            <p><i class="fas fa-phone"></i> 0709624986</p>
+                            <p><i class="fas fa-clock"></i> Available: Mon-Fri, 8AM-4PM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map & Directions -->
+    <section class="map-section" id="map">
+        <div class="container">
+            <div class="section-title">
+                <h2>Location & Directions</h2>
+                <p class="section-subtitle">Find us easily with the interactive map below and detailed directions.</p>
+            </div>
+
+            <!-- Interactive Map Container -->
+            <div class="map-container">
+                <div id="schoolMap"></div>
+                <div class="map-overlay">
+                    <h3><i class="fas fa-school"></i> School Location</h3>
+                    <p><strong>Address:</strong> Kityabule - Namayiba, Mukono District</p>
+                    <p><strong>Distance:</strong> 4km off Katosi Road</p>
+                    <p><strong>Coordinates:</strong> 0.3641° N, 32.7351° E</p>
+                    <button class="small-btn" onclick="getDirections()" style="margin-top: 10px;">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </button>
+                </div>
+            </div>
+
+            <!-- Directions -->
+            <div class="directions">
+                <h3>How to Reach Us</h3>
+                <div class="direction-steps">
+                    <div class="direction-step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h4>From Kampala City</h4>
+                            <p>Take Jinja Road towards Mukono. Pass through Mukono Town and continue on Katosi Road for approximately 4km. The school is in Kityabule - Namayiba, clearly marked with our signboard.</p>
+                        </div>
+                    </div>
+                    <div class="direction-step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h4>Using Public Transport</h4>
+                            <p>From Kampala, take a taxi/bus to Mukono Taxi Park. From Mukono, take a boda-boda (motorcycle taxi) or special hire taxi to Namayiba. Tell the driver "Ebenezer Imani School" - it's well known in the area.</p>
+                        </div>
+                    </div>
+                    <div class="direction-step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h4>By Private Vehicle</h4>
+                            <p>Use GPS coordinates: 0.3641° N, 32.7351° E. Ample parking space is available within the school compound for visitors.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="transport-options">
+                    <h4>Estimated Travel Times:</h4>
+                    <ul>
+                        <li><strong>From Kampala:</strong> 45-60 minutes by car</li>
+                        <li><strong>From Mukono Town:</strong> 10-15 minutes by boda-boda</li>
+                        <li><strong>From Jinja:</strong> 40-50 minutes by car</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Hours -->
+    <section class="hours-section">
+        <div class="container">
+            <div class="business-hours">
+                <h3>Business Hours & Visiting Times</h3>
+                <table class="hours-table">
+                    <tr>
+                        <td>Monday - Friday</td>
+                        <td>8:00 AM - 5:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Saturday</td>
+                        <td>9:00 AM - 1:00 PM</td>
+                    </tr>
+                    <tr>
+                        <td>Sunday</td>
+                        <td class="closed">Closed</td>
+                    </tr>
+                    <tr>
+                        <td>Public Holidays</td>
+                        <td class="closed">Closed</td>
+                    </tr>
+                </table>
+                
+                <div class="visiting-info">
+                    <h4>Visiting Guidelines:</h4>
+                    <ul>
+                        <li>All visitors must sign in at the security gate</li>
+                        <li>Please bring valid identification</li>
+                        <li>Appointments are recommended for meetings with specific staff</li>
+                        <li>School tours are available by prior arrangement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Contact -->
+    <section class="emergency-section">
+        <div class="container">
+            <div class="emergency-contact">
+                <h3><i class="fas fa-exclamation-triangle"></i> Emergency Contact</h3>
+                <p>For urgent matters outside business hours, please contact:</p>
+                <div class="emergency-details">
+                    <p><strong>Emergency Number:</strong> +256 761288927/ 773012774 (24/7)</p>
+                    <p><strong>School Security:</strong> Available on campus</p>
+                    <p><strong>Medical Emergency:</strong> Contact school administration immediately</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <div class="underline"></div>
+                <p class="section-subtitle">Quick answers to common questions about contacting us.</p>
+            </div>
+
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What is the best time to visit the school?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The best time to visit is during our business hours: Monday to Friday from 8:00 AM to 5:00 PM, or Saturdays from 9:00 AM to 1:00 PM. We recommend scheduling an appointment in advance, especially if you wish to meet specific staff members or take a school tour.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does it take to get a response to my inquiry?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We strive to respond to all inquiries within 24 hours during business days. For emails, you should receive a response within 1 business day. WhatsApp messages are typically answered within a few hours. Phone calls are answered during business hours. Urgent matters are prioritized.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I schedule a school tour?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We encourage prospective parents to tour our facilities. Please contact the school office via WhatsApp or phone call to schedule a tour. Tours are typically conducted on weekdays between 10:00 AM and 3:00 PM, but we can accommodate special arrangements if needed.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Media Contact -->
+    <section class="social-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Connect With Us on Social Media</h2>
+                <p class="section-subtitle">Follow us for updates, events, and school life highlights.</p>
+            </div>
+
+            <div class="social-contact">
+                <a href="#" class="social-link">
+                    <i class="fab fa-facebook-f"></i>
+                    <span>Facebook</span>
+                </a>
+                <a href="https://x.com/ebenezerimani" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                    <span>Twitter</span>
+                </a>
+                <a href="www.youtube.com/@ebenezerimaninurseryandprimary" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+                <a href="https://www.instagram.com/ebenezer_imani/" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://wa.me/256773012774" class="social-link" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+                <a href="https://www.tiktok.com/@ebenezerimanischool" class="social-link">
+                    <i class="fab fa-tiktok"></i>
+                    <span>TikTok</span>
+                </a>
+            </div>
+            
+            <div class="social-note">
+                <p><strong>Note:</strong> For official inquiries, please use our WhatsApp, email, or call our office numbers. Social media is for general updates and engagement.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Contact Banner -->
+    <section class="quick-contact-banner">
+        <div class="container">
+            <div class="quick-contact-content">
+                <h3>Still Have Questions?</h3>
+                <p>Don't hesitate to reach out. We're here to help!</p>
+                <div class="quick-contact-buttons">
+                    <a href="tel:+256773012774" class="btn">
+                        <i class="fas fa-phone-alt"></i> Call Now
+                    </a>
+                    <a href="mailto:ebenezerimanischool@gmail.com" class="btn btn-secondary">
+                        <i class="fas fa-envelope"></i> Send Email
+                    </a>
+                    <a href="https://wa.me/256773012774" class="btn" target="_blank" style="background: #25D366;">
+                        <i class="fab fa-whatsapp"></i> WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <h3>Ebenezer Imani Nursery & Primary School</h3>
+                
+                    <p class="motto">Thriving on Unity</p>
+                </div>
+                <p>A Christian-founded institution offering quality pre-primary and primary education in Mukono, Uganda.</p>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> Namayiba (Katosi Road), Mukono – Uganda</p>
+                    <p><i class="fas fa-phone"></i> 0761288927 / 0777287368 / 0709624986/ 0773012774 </p>
+                    <p><i class="fas fa-envelope"></i> ebenezerimanischool@gmail.com
+</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assets/docs/prospectus.pdf">School Prospectus</a></li>
+                    <li><a href="assets/docs/calendar.pdf">Academic Calendar</a></li>
+                    <li><a href="assets/docs/policy.pdf">School Policies</a></li>
+                    <li><a href="assets/docs/performance.pdf">Performance Reports</a></li>
+                    <li><a href="assets/docs/parents-guide.pdf">Parents' Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61574139293687" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/ebenezerimani" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="www.youtube.com/@ebenezerimaninurseryandprimary" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/ebenezer_imani/" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/256773012774" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.tiktok.com/@ebenezerimanischool?is_from_webapp=1&sender_device=pc" class="social-icon"><i class="fab fa-tiktok"></i></a>
+
+                </div>
+                <div class="newsletter">
+                    <h4>Subscribe to Newsletter</h4>
+                    <form id="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+                <div class="map-link">
+                    <a href="contact.html#map">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>View School Location on Map</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> Ebenezer Imani Nursery & Primary School. All Rights Reserved.</p>
+            <p>P.O. Box 4158, Kampala, Uganda | Designed for ICT Project Assessment</p>
+        </div>
+    </footer>
+
+    <!-- Leaflet JS for Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize map
+            function initMap() {
+                // School coordinates (approximate location for Kityabule - Namayiba)
+                const schoolCoords = [0.3641, 32.7351];
+                
+                // Create map
+                const map = L.map('schoolMap').setView(schoolCoords, 15);
+                
+                // Add OpenStreetMap tiles
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    maxZoom: 19,
+                    minZoom: 12
+                }).addTo(map);
+                
+                // Custom school icon
+                const schoolIcon = L.divIcon({
+                    className: 'school-marker',
+                    html: `
+                        <div style="
+                            background: linear-gradient(135deg, #dc2626, #b91c1c);
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: white;
+                            font-size: 1.5rem;
+                            border: 3px solid white;
+                            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+                            animation: pulse 2s infinite;
+                        ">
+                            <i class="fas fa-school"></i>
+                        </div>
+                    `,
+                    iconSize: [50, 50],
+                    iconAnchor: [25, 50],
+                    popupAnchor: [0, -45]
+                });
+                
+                // Add marker with custom icon
+                const marker = L.marker(schoolCoords, { 
+                    icon: schoolIcon,
+                    title: 'Ebenezer Imani Nursery & Primary School'
+                }).addTo(map);
+                
+                // Create popup content
+                const popupContent = `
+                    <div style="min-width: 250px; padding: 5px;">
+                        <h3 style="color: #1e3a8a; margin: 0 0 10px 0; font-size: 1.2rem; border-bottom: 2px solid #f59e0b; padding-bottom: 5px;">
+                            <i class="fas fa-school"></i> Ebenezer Imani School
+                        </h3>
+                        <div style="margin-bottom: 10px;">
+                            <p style="margin: 5px 0; color: #475569;">
+                                <strong><i class="fas fa-map-marker-alt"></i> Location:</strong><br>
+                                Kityabule - Namayiba, Mukono District
+                            </p>
+                            <p style="margin: 5px 0; color: #475569;">
+                                <strong><i class="fas fa-road"></i> Distance:</strong><br>
+                                4km off Katosi Road
+                            </p>
+                            <p style="margin: 5px 0; color: #475569;">
+                                <strong><i class="fas fa-compass"></i> Coordinates:</strong><br>
+                                0.3641° N, 32.7351° E
+                            </p>
+                        </div>
+                        <button onclick="getDirections()" style="
+                            width: 100%;
+                            padding: 8px 16px;
+                            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+                            color: white;
+                            border: none;
+                            border-radius: 6px;
+                            cursor: pointer;
+                            font-weight: 600;
+                            margin-top: 5px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            gap: 8px;
+                        ">
+                            <i class="fas fa-directions"></i> Get Directions
+                        </button>
+                    </div>
+                `;
+                
+                // Bind popup to marker
+                marker.bindPopup(popupContent);
+                
+                // Add a circle to show approximate area
+                L.circle(schoolCoords, {
+                    color: '#1e3a8a',
+                    fillColor: '#1e3a8a',
+                    fillOpacity: 0.1,
+                    radius: 200,
+                    weight: 2,
+                    dashArray: '5, 5'
+                }).addTo(map);
+                
+                // Add scale control
+                L.control.scale({
+                    imperial: false,
+                    metric: true,
+                    position: 'bottomright'
+                }).addTo(map);
+            }
+            
+            // Get directions function
+            window.getDirections = function() {
+                const destination = "0.3641,32.7351";
+                const label = "Ebenezer+Imani+Nursery+Primary+School";
+                const url = `https://www.google.com/maps/dir/?api=1&destination=${destination}&destination_place_name=${label}`;
+                window.open(url, '_blank');
+            }
+            
+            // WhatsApp sending function
+            window.sendViaWhatsApp = function() {
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                if (!name || !phone || !subject || !message) {
+                    showMessage('error', 'Please fill in all required fields before sending via WhatsApp');
+                    return;
+                }
+                
+                const subjectText = {
+                    'admissions': 'Admissions Inquiry',
+                    'fees': 'Fees & Payment',
+                    'academics': 'Academic Matters',
+                    'boarding': 'Boarding Section',
+                    'employment': 'Employment Opportunities',
+                    'partnership': 'Partnership & Sponsorship',
+                    'other': 'Other Inquiry'
+                }[subject] || subject;
+                
+                const whatsappMessage = `Hello Ebenezer Imani School,%0A%0AName: ${encodeURIComponent(name)}%0APhone: ${encodeURIComponent(phone)}%0ASubject: ${encodeURIComponent(subjectText)}%0AMessage: ${encodeURIComponent(message)}%0A%0A(I sent this message via your website contact form)`;
+                
+                const whatsappUrl = `https://wa.me/256773012774?text=${whatsappMessage}`;
+                window.open(whatsappUrl, '_blank');
+            }
+            
+            // Email sending function
+            function sendViaEmail(formData) {
+                const { name, email, phone, subject, message } = formData;
+                
+                const subjectText = {
+                    'admissions': 'Admissions Inquiry',
+                    'fees': 'Fees & Payment',
+                    'academics': 'Academic Matters',
+                    'boarding': 'Boarding Section',
+                    'employment': 'Employment Opportunities',
+                    'partnership': 'Partnership & Sponsorship',
+                    'other': 'Other Inquiry'
+                }[subject] || subject;
+                
+                const emailSubject = `Website Inquiry: ${subjectText}`;
+                const emailBody = `
+Name: ${name}
+Email: ${email || 'Not provided'}
+Phone: ${phone}
+Subject: ${subjectText}
+
+Message:
+${message}
+
+---
+This message was sent via the Ebenezer Imani School website contact form.
+                `;
+                
+                const emailUrl = `mailto:ebenezerimanischool@gmail.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+                return emailUrl;
+            }
+            
+            // Show message function
+            function showMessage(type, text, elementId = null) {
+                const element = elementId ? document.getElementById(elementId) : 
+                    (type === 'success' ? successMessage : 
+                     type === 'error' ? errorMessage : infoMessage);
+                
+                if (elementId) {
+                    document.getElementById(elementId + 'Text').textContent = text;
+                } else if (type === 'success') {
+                    successText.textContent = text;
+                } else if (type === 'error') {
+                    errorText.textContent = text;
+                } else {
+                    infoText.textContent = text;
+                }
+                
+                // Hide all messages first
+                successMessage.style.display = 'none';
+                errorMessage.style.display = 'none';
+                infoMessage.style.display = 'none';
+                
+                // Show the selected message
+                element.style.display = 'block';
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            
+            // Initialize map
+            initMap();
+            
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Mobile navigation toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                
+                // Close mobile menu when clicking a link
+                document.querySelectorAll('.nav-menu a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    });
+                });
+            }
+            
+            // FAQ Toggle functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    const icon = question.querySelector('i');
+                    
+                    // Close other open FAQs
+                    document.querySelectorAll('.faq-answer.active').forEach(activeAnswer => {
+                        if (activeAnswer !== answer) {
+                            activeAnswer.classList.remove('active');
+                            activeAnswer.previousElementSibling.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current FAQ
+                    answer.classList.toggle('active');
+                    question.classList.toggle('active');
+                    icon.style.transform = answer.classList.contains('active') ? 'rotate(180deg)' : 'rotate(0deg)';
+                });
+            });
+            
+            // Contact Form Submission
+            const contactForm = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const successMessage = document.getElementById('successMessage');
+            const errorMessage = document.getElementById('errorMessage');
+            const infoMessage = document.getElementById('infoMessage');
+            const successText = document.getElementById('successText');
+            const errorText = document.getElementById('errorText');
+            const infoText = document.getElementById('infoText');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    // Show loading spinner
+                    submitBtn.disabled = true;
+                    loadingSpinner.style.display = 'block';
+                    
+                    // Hide any previous messages
+                    successMessage.style.display = 'none';
+                    errorMessage.style.display = 'none';
+                    infoMessage.style.display = 'none';
+                    
+                    // Basic form validation
+                    let isValid = true;
+                    const requiredFields = contactForm.querySelectorAll('[required]');
+                    
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            field.style.borderColor = 'red';
+                            isValid = false;
+                        } else {
+                            field.style.borderColor = '';
+                        }
+                    });
+                    
+                    if (!isValid) {
+                        showMessage('error', 'Please fill in all required fields marked with *');
+                        submitBtn.disabled = false;
+                        loadingSpinner.style.display = 'none';
+                        return;
+                    }
+                    
+                    // Get form data
+                    const formData = {
+                        name: document.getElementById('name').value,
+                        email: document.getElementById('email').value,
+                        phone: document.getElementById('phone').value,
+                        subject: document.getElementById('subject').value,
+                        message: document.getElementById('message').value,
+                        responseMethod: document.querySelector('input[name="responseMethod"]:checked')?.value
+                    };
+                    
+                    // Get selected response method
+                    const responseMethod = formData.responseMethod;
+                    
+                    if (!responseMethod) {
+                        showMessage('error', 'Please select how you would like us to respond');
+                        submitBtn.disabled = false;
+                        loadingSpinner.style.display = 'none';
+                        return;
+                    }
+                    
+                    // Route message based on selected method
+                    let redirectUrl = '';
+                    let messageType = '';
+                    
+                    switch(responseMethod) {
+                        case 'whatsapp':
+                            const whatsappMessage = `Hello Ebenezer Imani School,%0A%0AName: ${encodeURIComponent(formData.name)}%0APhone: ${encodeURIComponent(formData.phone)}%0AEmail: ${encodeURIComponent(formData.email || 'Not provided')}%0ASubject: ${encodeURIComponent(formData.subject)}%0AMessage: ${encodeURIComponent(formData.message)}%0A%0A(I sent this message via your website contact form)`;
+                            redirectUrl = `https://wa.me/256773012774?text=${whatsappMessage}`;
+                            messageType = 'WhatsApp';
+                            break;
+                            
+                        case 'email':
+                            redirectUrl = sendViaEmail(formData);
+                            messageType = 'Email';
+                            break;
+                            
+                        case 'phone':
+                            redirectUrl = `tel:+256773012774`;
+                            messageType = 'Phone Call';
+                            break;
+                    }
+                    
+                    // Simulate processing
+                    setTimeout(() => {
+                        // Reset button and spinner
+                        submitBtn.disabled = false;
+                        loadingSpinner.style.display = 'none';
+                        
+                        // Show success message with instructions
+                        if (responseMethod === 'email') {
+                            // For email, we need to open the mail client
+                            showMessage('info', `Your message is ready to be sent via email. Your email client will open with the message pre-filled. Please click "Send" to complete.`);
+                            setTimeout(() => {
+                                window.location.href = redirectUrl;
+                            }, 1500);
+                        } else {
+                            // For WhatsApp and Phone, show success and redirect
+                            showMessage('success', `Your message is ready to be sent via ${messageType}. You will be redirected shortly...`);
+                            setTimeout(() => {
+                                window.open(redirectUrl, responseMethod === 'whatsapp' ? '_blank' : '_self');
+                            }, 1500);
+                        }
+                        
+                        // Reset form
+                        contactForm.reset();
+                    }, 1000);
+                });
+                
+                // Real-time validation
+                const inputs = contactForm.querySelectorAll('input, textarea, select');
+                inputs.forEach(input => {
+                    input.addEventListener('input', () => {
+                        if (input.hasAttribute('required') && !input.value.trim()) {
+                            input.style.borderColor = 'red';
+                        } else {
+                            input.style.borderColor = '';
+                        }
+                    });
+                });
+            }
+            
+            // Phone number formatting
+            const phoneInput = document.getElementById('phone');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    
+                    if (value.length > 0) {
+                        // Format as +256 XXX XXX XXX
+                        if (!value.startsWith('256')) {
+                            if (!value.startsWith('0')) {
+                                value = '256' + value;
+                            } else {
+                                value = '256' + value.substring(1);
+                            }
+                        }
+                        
+                        // Format with spaces
+                        let formatted = '+256 ';
+                        if (value.length > 3) formatted += value.substring(3, 6) + ' ';
+                        if (value.length > 6) formatted += value.substring(6, 9) + ' ';
+                        if (value.length > 9) formatted += value.substring(9, 12);
+                        e.target.value = formatted.trim();
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fees Structure | Ebenezer Imani Nursery & Primary School</title>
+       <!-- Main CSS -->
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="colors.css">
+    
+    <!-- External Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* Fees page specific styles */
+        .fees-tabs {
+            display: flex;
+            gap: 10px;
+            margin: 30px 0;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 0;
+        }
+        
+        .fee-tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--text-color);
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .fee-tab.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+            background-color: #f8fafc;
+        }
+        
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .fees-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: var(--box-shadow);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+        }
+        
+        .fees-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 18px 15px;
+            text-align: left;
+            font-weight: 500;
+        }
+        
+        .fees-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .fees-table tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        .fees-table tr:hover {
+            background-color: #f1f5f9;
+        }
+        
+        .fee-amount {
+            font-weight: 600;
+            color: var(--primary-color);
+            text-align: right;
+        }
+        
+        .fee-category {
+            font-weight: 500;
+            color: var(--dark-color);
+        }
+        
+        .fee-notes {
+            background-color: #fff8e1;
+            padding: 20px;
+            border-radius: var(--border-radius);
+            margin: 25px 0;
+            border-left: 4px solid var(--accent-color);
+        }
+        
+        .fee-notes h4 {
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .payment-method {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+        }
+        
+        .payment-method i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .installment-plan {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin: 30px 0;
+        }
+        
+        .installment-dates {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .installment-date {
+            padding: 15px;
+            background: #f8fafc;
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+        
+        .installment-date .percentage {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+        
+        .additional-costs {
+            margin: 40px 0;
+        }
+        
+        .cost-category {
+            margin-bottom: 25px;
+        }
+        
+        .cost-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .discounts-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            margin: 40px 0;
+        }
+        
+        .discount-card {
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .discount-badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .fee-calculator {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin: 40px 0;
+        }
+        
+        .calculator-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .calculator-result {
+            background: #f8fafc;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin-top: 25px;
+            text-align: center;
+        }
+        
+        .total-fee {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 10px 0;
+        }
+        
+        .currency {
+            font-size: 1.2rem;
+            color: var(--text-color);
+        }
+
+        .page-banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                url('banner-image.jpg') center/cover no-repeat;
+    color: #fff;
+    text-align: center;
+    padding: 80px 20px;
+    border-bottom: 5px solid #f4c542; /* accent color */
+}
+
+.banner-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.banner-content h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: #f4c542; /* highlight color */
+}
+
+.banner-content p {
+    font-size: 1.2rem;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+    color: #e0e0e0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .banner-content h1 {
+        font-size: 2.2rem;
+    }
+    .banner-content h2 {
+        font-size: 1.6rem;
+    }
+    .banner-content p {
+        font-size: 1rem;
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+              <div class="logo">
+                <img src="images/sch logo.jfif" alt="Ebenezer Imani Logo">
+                <div class="school-name">
+                    <h1>Ebenezer Imani</h1>
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="academics.html"><i class="fas fa-graduation-cap"></i> Academics</a></li>
+                    <li><a href="admissions.html"><i class="fas fa-user-plus"></i> Admissions</a></li>
+                    <li><a href="fees.html" class="active"><i class="fas fa-money-check-alt"></i> Fees</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-photo-video"></i> Gallery</a></li>
+                    <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Banner -->
+    <section class="page-banner">
+        <div class="banner-content">
+           <h1>Ebenezer Imani Nursery & Primary School</h1>
+                    <p class="motto">Thriving on Unity</p>
+            <h2>Fees Structure</h2>
+            <p>Transparent and affordable fee structure for quality education</p>
+        </div>
+    </section>
+
+    <!-- Fees Content -->
+    <section class="fees-content">
+        <div class="container">
+            <div class="intro-section">
+                <h2>School Fees 2026 Academic Year</h2>
+                <p>At Ebenezer Imani, we are committed to providing quality education at reasonable costs. Our fee structure is transparent with no hidden charges. All fees are payable per term (3 terms per year).</p>
+            </div>
+
+            <!-- Fees Tabs -->
+            <div class="fees-tabs-container">
+                <div class="fees-tabs">
+                    <button class="fee-tab active" data-tab="day-school">Day School Fees</button>
+                    <button class="fee-tab" data-tab="boarding">Boarding Section Fees</button>
+                    <button class="fee-tab" data-tab="one-time">One-Time Payments</button>
+                </div>
+
+                <!-- Day School Tab -->
+                <div class="tab-content active" id="day-school">
+                    <h3>Day School Fees Structure (Per Term)</h3>
+                    <p>For students who attend school daily from 8:00 AM to 4:00 PM.</p>
+                    
+                    <table class="fees-table">
+                        <thead>
+                            <tr>
+                                <th>Class Level</th>
+                                <th>Admission Fee</th>
+                                <th>Development Fee</th>
+                                <th>Functin Fee</th>
+                                <th>Tuition Fee</th>
+                                <th>Total Per Term</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fee-category">Baby Class - Middle Class (Age 3-4)</td>
+                                <td class="fee-amount">UGX 20,000</td>
+                                <td class="fee-amount">UGX 30,000</td>
+                                 <td class="fee-amount">UGX 44,000</td>
+                                <td class="fee-amount">UGX 230,000</td>
+                                <td class="fee-amount">UGX 324,000</td>
+                            </tr>
+
+                            <tr>
+                                <td class="fee-category">Top Class (Age 5-6)</td>
+                                <td class="fee-amount">UGX 20,000</td>
+                                <td class="fee-amount">UGX 30,000</td>
+                                 <td class="fee-amount">UGX 44,000</td>
+                                <td class="fee-amount">UGX 230,000</td>
+                                <td class="fee-amount">UGX 324,000</td>
+                            </tr>
+                            <tr>
+                                <td class="fee-category">Primary One (P.1- P.3)</td>
+                                <td class="fee-amount">UGX 20,000</td>
+                                <td class="fee-amount">UGX 30,000</td>
+                                 <td class="fee-amount">UGX 44,000</td>
+                                <td class="fee-amount">UGX 250,000</td>
+                                <td class="fee-amount">UGX 344,000</td>
+                            </tr>
+                          
+                            <tr>
+                                <td class="fee-category">Primary Four (P.4 - P.6)</td>
+                                 <td class="fee-amount">UGX 20,000</td>
+                                <td class="fee-amount">UGX 30,000</td>
+                                 <td class="fee-amount">UGX 44,000</td>
+                                <td class="fee-amount">UGX 300,000</td>
+                                <td class="fee-amount">UGX 394,000</td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fee-category">Primary Seven (P.7)</td>
+                                <td class="fee-amount">UGX 20,000</td>
+                                <td class="fee-amount">UGX 30,000</td>
+                                 <td class="fee-amount">UGX 44,000</td>
+                                <td class="fee-amount">UGX 450,000</td>
+                                <td class="fee-amount">UGX 544,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="fee-notes">
+                        <h4><i class="fas fa-info-circle"></i> Important Notes for Day School</h4>
+                        <ul>
+                            <li>Admission fee is paid once when joining the school</li>
+                            <li>Development fee is paid once per year (first term only)</li>
+                            <li>Tuition fee includes: textbooks, exercise books, and basic stationery</li>
+                            <li>Fees are payable at the beginning of each term</li>
+                            <li>Late payment may attract a penalty of UGX 10,000 per week</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Boarding Section Tab -->
+                <div class="tab-content" id="boarding">
+                    <h3>Boarding Section Fees Structure (Per Term)</h3>
+                    <p>For students who reside at the school premises. Includes accommodation, meals, and supervision.</p>
+                    
+                    <table class="fees-table">
+                        <thead>
+                            <tr>
+                                 <th>Class Level</th>
+                                <th>Admission Fee</th>
+                                <th>Development Fee</th>
+                                <th>Functin Fee</th>
+                                <th>Tuition Fee</th>
+                                <th>Total Per Term</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="fee-category">Baby Class - Middle Class (Age 3-4)</td>
+                                <td class="fee-amount">UGX 20,000</td>
+                                <td class="fee-amount">UGX 30,000</td>
+                                 <td class="fee-amount">UGX 67,000</td>
+                                <td class="fee-amount">UGX 450,000</td>
+                                <td class="fee-amount">UGX 567,000</td>
+                            </tr>
+
+                            <tr>
+                                <td class="fee-category">Top Class (Age 5-6)</td>
+                                <td class="fee-amount">UGX 20,000</td>
+                                <td class="fee-amount">UGX 30,000</td>
+                                 <td class="fee-amount">UGX 67,000</td>
+                                <td class="fee-amount">UGX 450,000</td>
+                                <td class="fee-amount">UGX 567,000</td>
+                            </tr>
+                            <tr>
+                                <td class="fee-category">Primary One (P.1- P.3)</td>
+                                <td class="fee-amount">UGX 20,000</td>
+                                <td class="fee-amount">UGX 30,000</td>
+                                 <td class="fee-amount">UGX 67,000</td>
+                                <td class="fee-amount">UGX 500,000</td>
+                                <td class="fee-amount">UGX 617,000</td>
+                            </tr>
+                          
+                            <tr>
+                                <td class="fee-category">Primary Four (P.4 - P.6)</td>
+                                 <td class="fee-amount">UGX 20,000</td>
+                                <td class="fee-amount">UGX 30,000</td>
+                                 <td class="fee-amount">UGX 67,000</td>
+                                <td class="fee-amount">UGX 550,000</td>
+                                <td class="fee-amount">UGX 667,000</td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="fee-category">Primary Seven (P.7)</td>
+                                 <td class="fee-amount">UGX 20,000</td>
+                                <td class="fee-amount">UGX 30,000</td>
+                                 <td class="fee-amount">UGX 50,000</td>
+                                <td class="fee-amount">UGX 650,000</td>
+                                <td class="fee-amount">UGX 750,000</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="fee-notes">
+                        <h4><i class="fas fa-info-circle"></i> Boarding Section Includes:</h4>
+                        <ul>
+                            <li>Accommodation in dormitories (separate for boys and girls)</li>
+                            <li>Three balanced meals per day plus snacks</li>
+                            <li>Evening prep (study) supervision</li>
+                            <li>Weekend activities and excursions</li>
+                            <li>Laundry services (uniforms only)</li>
+                            <li>24/7 security and matron care</li>
+                        </ul>
+                        <p><strong>Note:</strong> Nursery section does not offer boarding facilities. Boarding is available from Primary One onwards.</p>
+                    </div>
+                </div>
+
+                <!-- One-Time Payments Tab -->
+                <div class="tab-content" id="one-time">
+                    <h3>One-Time Payments & Additional Costs</h3>
+                    <p>These are mandatory or optional payments made once during the student's time at the school.</p>
+                    
+                    <div class="additional-costs">
+                        <div class="cost-category">
+                            <h4>Mandatory One-Time Payments</h4>
+                            <div class="cost-items">
+                                <div class="cost-item">
+                                    <span>School Uniform Set (Complete)</span>
+                                    <span class="fee-amount">UGX 85,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span>Sports Uniform (PE Kit)</span>
+                                    <span class="fee-amount">UGX 35,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span>School Sweater/Jacket</span>
+                                    <span class="fee-amount">UGX 25,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span>Medical Insurance (Annual)</span>
+                                    <span class="fee-amount">UGX 30,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span>Identification Card</span>
+                                    <span class="fee-amount">UGX 10,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span>School Bag</span>
+                                    <span class="fee-amount">UGX 25,000</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="cost-category">
+                            <h4>Optional Costs (As Needed)</h4>
+                            <div class="cost-items">
+                                <div class="cost-item">
+                                    <span>School Tours & Trips (Per trip)</span>
+                                    <span class="fee-amount">UGX 20,000 - 50,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span>Extra-Curricular Clubs (Per term)</span>
+                                    <span class="fee-amount">UGX 15,000 - 30,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span>Swimming Lessons (Per term)</span>
+                                    <span class="fee-amount">UGX 40,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span>Music Instrument Lessons</span>
+                                    <span class="fee-amount">UGX 50,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span>Remedial Classes (Per subject)</span>
+                                    <span class="fee-amount">UGX 30,000</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="cost-category">
+                            <h4>Examination Fees (As Applicable)</h4>
+                            <div class="cost-items">
+                                <div class="cost-item">
+                                    <span>Mock Examinations (P.7)</span>
+                                    <span class="fee-amount">UGX 40,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span>Primary Leaving Examinations (PLE)</span>
+                                    <span class="fee-amount">UGX 60,000</span>
+                                </div>
+                                <div class="cost-item">
+                                    <span>Other National Assessments</span>
+                                    <span class="fee-amount">UGX 15,000 - 30,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fee-notes">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Important Notes:</h4>
+                        <ul>
+                            <li>Uniform costs are approximate and may vary based on supplier</li>
+                            <li>Optional costs are not mandatory but enhance the learning experience</li>
+                            <li>Examination fees are paid when due and announced in advance</li>
+                            <li>All payments should be made to the school bank account or at the bursar's office</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Information -->
+            <div class="payment-information">
+                <h2>Payment Methods & Instructions</h2>
+                
+                <div class="payment-methods">
+                    <div class="payment-method">
+                        <i class="fas fa-university"></i>
+                        <h4>Bank Transfer</h4>
+                        <p>Make payment directly to our bank account:</p>
+                        <p><strong>Bank:</strong>Bank of Baroda</p>
+                        <p><strong>Account Name:</strong> Ebenezer Imani Nursery & Primary School</p>
+                        <p><strong>Account Number:</strong>95100200000447</p>
+                        <p><strong>Any Branch of Bank of Baroda</strong> </p>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <i class="fas fa-money-check-alt"></i>
+                        <h4>Mobile Money</h4>
+                        <p>Call for more information</p>
+                        <p><strong>MTN Mobile Money:</strong>0761288927/ 0773012774</p>
+                        <p><strong>Reference:</strong> Student Name & Class</p>
+                        <p>SMS receipt to school number after payment</p>
+                    </div>
+                    
+                    <div class="payment-method">
+                        <i class="fas fa-cash-register"></i>
+                        <h4>Cash Payment</h4>
+                        <p>Note: All Payments are done using SurePay</p>
+                        <p>Only Developmen fee, Admission, fee, Uniform fee are received</p>
+                        <p>Pay at the school bursar's office:</p>
+                        <p><strong>Location:</strong> Administration Block</p>
+                        <p><strong>Hours:</strong> 8:00 AM - 4:00 PM (Mon-Fri)</p>
+                        <p><strong>Saturday:</strong> 9:00 AM - 1:00 PM</p>
+                        <p>Always request an official receipt</p>
+                    </div>
+                </div>
+                
+                <div class="fee-notes">
+                    <h4><i class="fas fa-clipboard-check"></i> Payment Instructions:</h4>
+                    <ol>
+                        <li>Quote student's full name and class as payment reference</li>
+                        <li>Payments should be made at least one week before term begins</li>
+                        <li>Keep all payment receipts for verification</li>
+                        <li>For bank transfers, email receipt to accounts@ebenezerimani.ac.ug</li>
+                        <li>Late payments may affect student's participation in school activities</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Installment Plans -->
+            <div class="installment-plan">
+                <h2>Flexible Payment Plans</h2>
+                <div class="underline"></div>
+                <p>We understand that paying full fees at once can be challenging. We offer installment plans upon request.</p>
+                
+                <div class="installment-dates">
+                    <div class="installment-date">
+                        <h4>Plan A: Two Installments</h4>
+                        <div class="percentage">50%</div>
+                        <p>At beginning of term</p>
+                        <div class="percentage">50%</div>
+                        <p>Mid-term (before break)</p>
+                    </div>
+                    
+                    <div class="installment-date">
+                        <h4>Plan B: Three Installments</h4>
+                        <div class="percentage">40%</div>
+                        <p>At beginning of term</p>
+                        <div class="percentage">40%</div>
+                        <p>Mid-term</p>
+                        <div class="percentage">30%</div>
+                        <p>End of term</p>
+                    </div>
+                    
+                    <div class="installment-date">
+                        <h4>Plan C: Monthly</h4>
+                        <div class="percentage">100%</div>
+                        <p>Pay at once</p>
+                        <p><small>Available upon special arrangement with management</small></p>
+                    </div>
+                </div>
+                
+                <div class="fee-notes">
+                    <p><strong>Note:</strong> Installment plans require a signed agreement with the school bursar. A small administrative fee of UGX 10,000 applies for installment arrangements. Admission and development fees must be paid in full at the beginning of the term.</p>
+                </div>
+            </div>
+
+            <!-- Discounts & Scholarships -->
+            <div class="discounts-section">
+                <h2>Discounts & Scholarships</h2>
+                <p>We offer various discounts to support our school community and recognize excellence.</p>
+                
+                <div class="discounts-grid">
+                    <div class="discount-card">
+                        <span class="discount-badge">Siblings Discount</span>
+                        <h3>Multiple Children Discount</h3>
+                        <p>Families with more than one child at our school receive:</p>
+                        <ul>
+                            <li>2nd child: 5% discount on tuition</li>
+                            <li>3rd child: 10% discount on tuition</li>
+                            <li>4th child+: 20% discount on tuition</li>
+                        </ul>
+                        <p><small>Discount applies to tuition fee only. All other fees remain full.</small></p>
+                    </div>
+                    
+                    <div class="discount-card">
+                        <span class="discount-badge">Early Payment</span>
+                        <h3>Early Bird Discount</h3>
+                        <p>Pay your term fees early and save:</p>
+                        <ul>
+                            <li>Payment 4 weeks before term: 5% discount</li>
+                            <li>Payment 2 weeks before term: 3% discount</li>
+                            <li>Full year payment in advance: 10% discount</li>
+                        </ul>
+                        <p><small>Discount applies to total term fees (excluding one-time payments).</small></p>
+                    </div>
+                    
+                    <div class="discount-card">
+                        <span class="discount-badge">Academic Excellence</span>
+                        <h3>Merit Scholarships</h3>
+                        <p>Top performing students may qualify for:</p>
+                        <ul>
+                            <li>Position 1 in class: 25% scholarship</li>
+                            <li>Position 2 in class: 15% scholarship</li>
+                            <li>Consistent performance: Various scholarships</li>
+                        </ul>
+                        <p><small>Awarded based on previous term's results and conduct.</small></p>
+                    </div>
+                    
+                    <div class="discount-card">
+                        <span class="discount-badge">Special Consideration</span>
+                        <h3>Financial Assistance</h3>
+                        <p>Limited financial aid available for:</p>
+                        <ul>
+                            <li>Orphans and vulnerable children</li>
+                            <li>Children of single parents</li>
+                            <li>Families with proven financial need</li>
+                            <li>Children with special talents</li>
+                        </ul>
+                        <p><small>Requires application and documentation. Limited slots available.</small></p>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <a href="contact.html" class="btn">
+                        <i class="fas fa-file-alt"></i> Apply for Financial Aid
+                    </a>
+                </div>
+            </div>
+
+            <!-- Fee Calculator -->
+            <div class="fee-calculator">
+                <h2>Fee Calculator</h2>
+                <p>Estimate your total school fees for the term.</p>
+                
+                <form class="calculator-form" id="feeCalculator">
+                    <div class="form-group">
+                        <label for="calc-class">Select Class *</label>
+                        <select id="calc-class" name="calc-class" required>
+                            <option value="">Select Class</option>
+                            <optgroup label="Nursery (Day Only)">
+                                <option value="baby-day">Baby Class</option>
+                                <option value="middle-day">Middle Class</option>
+                                <option value="top-day">Top Class</option>
+                            </optgroup>
+                            <optgroup label="Primary (Day)">
+                                <option value="p1-day">Primary One</option>
+                                <option value="p2-day">Primary Two</option>
+                                <option value="p3-day">Primary Three</option>
+                                <option value="p4-day">Primary Four</option>
+                                <option value="p5-day">Primary Five</option>
+                                <option value="p6-day">Primary Six</option>
+                                <option value="p7-day">Primary Seven</option>
+                            </optgroup>
+                            <optgroup label="Primary (Boarding)">
+                                <option value="p1-board">Primary One (Boarding)</option>
+                                <option value="p2-board">Primary Two (Boarding)</option>
+                                <option value="p3-board">Primary Three (Boarding)</option>
+                                <option value="p4-board">Primary Four (Boarding)</option>
+                                <option value="p5-board">Primary Five (Boarding)</option>
+                                <option value="p6-board">Primary Six (Boarding)</option>
+                                <option value="p7-board">Primary Seven (Boarding)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="calc-siblings">Number of Siblings at School</label>
+                        <select id="calc-siblings" name="calc-siblings">
+                            <option value="0">0 (No siblings)</option>
+                            <option value="1">1 sibling</option>
+                            <option value="2">2 siblings</option>
+                            <option value="3">3 or more siblings</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="calc-new">Is this a new student?</label>
+                        <select id="calc-new" name="calc-new">
+                            <option value="no">No, returning student</option>
+                            <option value="yes">Yes, new student</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="calc-uniform">Need School Uniform?</label>
+                        <select id="calc-uniform" name="calc-uniform">
+                            <option value="no">No, already have</option>
+                            <option value="full">Full uniform set</option>
+                            <option value="partial">Partial items only</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="calc-payment">Payment Plan</label>
+                        <select id="calc-payment" name="calc-payment">
+                            <option value="full">Full payment</option>
+                            <option value="installment">Installment plan</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="calc-early">Early Payment Discount?</label>
+                        <select id="calc-early" name="calc-early">
+                            <option value="no">No</option>
+                            <option value="2weeks">2 weeks early (3%)</option>
+                            <option value="4weeks">4 weeks early (5%)</option>
+                        </select>
+                    </div>
+                </form>
+                
+                <div class="calculator-result" id="calcResult" style="display: none;">
+                    <h3>Estimated Term Fees</h3>
+                    <div class="total-fee">
+                        <span class="currency">UGX</span> <span id="totalAmount">0</span>
+                    </div>
+                    <p id="breakdown"></p>
+                    <p><small>This is an estimate. Actual fees may vary based on specific circumstances.</small></p>
+                </div>
+                
+                <div class="text-center">
+                    <button class="btn" id="calculateBtn">
+                        <i class="fas fa-calculator"></i> Calculate Fees
+                    </button>
+                </div>
+            </div>
+
+            <!-- Contact for Fee Queries -->
+            <div class="fee-queries">
+                <div class="contact-card">
+                    <h2>Fee-Related Queries?</h2>
+                    <p>Contact our accounts department for any questions about fees, payments, or financial arrangements.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-user-tie"></i>
+                            <div>
+                                <h4>Office number</h4>
+                                <p>+256 761288927</p>
+                                <p>ebenezerimanischool@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h4>Office Hours</h4>
+                                <p>Monday - Friday: 8:00 AM - 4:00 PM</p>
+                                <p>Saturday: 9:00 AM - 1:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+ <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <h3>Ebenezer Imani Nursery & Primary School</h3>
+                
+                    <p class="motto">Thriving on Unity</p>
+                </div>
+                <p>A Christian-founded institution offering quality pre-primary and primary education in Mukono, Uganda.</p>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> Namayiba (Katosi Road), Mukono – Uganda</p>
+                    <p><i class="fas fa-phone"></i> 0761288927 / 0777287368 / 0709624986/ 0773012774 </p>
+                    <p><i class="fas fa-envelope"></i> ebenezerimanischool@gmail.com
+</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assets/docs/prospectus.pdf">School Prospectus</a></li>
+                    <li><a href="assets/docs/calendar.pdf">Academic Calendar</a></li>
+                    <li><a href="assets/docs/policy.pdf">School Policies</a></li>
+                    <li><a href="assets/docs/performance.pdf">Performance Reports</a></li>
+                    <li><a href="assets/docs/parents-guide.pdf">Parents' Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61574139293687" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/ebenezerimani" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="www.youtube.com/@ebenezerimaninurseryandprimary" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/ebenezer_imani/" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/256773012774" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.tiktok.com/@ebenezerimanischool?is_from_webapp=1&sender_device=pc" class="social-icon"><i class="fab fa-tiktok"></i></a>
+
+                </div>
+                <div class="newsletter">
+                    <h4>Subscribe to Newsletter</h4>
+                    <form id="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+                <div class="map-link">
+                    <a href="contact.html#map">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>View School Location on Map</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> Ebenezer Imani Nursery & Primary School. All Rights Reserved.</p>
+            <p>P.O. Box 4158, Kampala, Uganda | Designed for ICT Project Assessment</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching
+            const feeTabs = document.querySelectorAll('.fee-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            feeTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    // Remove active class from all tabs and contents
+                    feeTabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked tab and corresponding content
+                    tab.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Fee Calculator
+            const feeCalculator = {
+                // Base fees structure (per term)
+                fees: {
+                    // Day School
+                    'baby-day': { admission: 20000, development: 30000, tuition: 200000, boarding: 0 },
+                    'middle-day': { admission: 20000, development: 30000, tuition: 210000, boarding: 0 },
+                    'top-day': { admission: 20000, development: 30000, tuition: 220000, boarding: 0 },
+                    'p1-day': { admission: 20000, development: 30000, tuition: 230000, boarding: 0 },
+                    'p2-day': { admission: 20000, development: 30000, tuition: 230000, boarding: 0 },
+                    'p3-day': { admission: 20000, development: 30000, tuition: 240000, boarding: 0 },
+                    'p4-day': { admission: 20000, development: 30000, tuition: 250000, boarding: 0 },
+                    'p5-day': { admission: 20000, development: 30000, tuition: 270000, boarding: 0 },
+                    'p6-day': { admission: 20000, development: 30000, tuition: 290000, boarding: 0 },
+                    'p7-day': { admission: 20000, development: 30000, tuition: 310000, boarding: 0 },
+                    
+                    // Boarding
+                    'p1-board': { admission: 30000, development: 30000, tuition: 230000, boarding: 220000 },
+                    'p2-board': { admission: 30000, development: 30000, tuition: 230000, boarding: 220000 },
+                    'p3-board': { admission: 30000, development: 30000, tuition: 240000, boarding: 230000 },
+                    'p4-board': { admission: 30000, development: 30000, tuition: 250000, boarding: 240000 },
+                    'p5-board': { admission: 30000, development: 30000, tuition: 270000, boarding: 260000 },
+                    'p6-board': { admission: 30000, development: 30000, tuition: 290000, boarding: 280000 },
+                    'p7-board': { admission: 30000, development: 30000, tuition: 310000, boarding: 300000 }
+                },
+                
+                // Additional costs
+                additional: {
+                    uniform: { full: 85000, partial: 42500, none: 0 }
+                },
+                
+                // Discounts
+                discounts: {
+                    siblings: [0, 0.05, 0.10, 0.15], // 0, 1, 2, 3+ siblings
+                    early: { 'no': 0, '2weeks': 0.03, '4weeks': 0.05 }
+                },
+                
+                calculate: function() {
+                    const selectedClass = document.getElementById('calc-class').value;
+                    const siblings = parseInt(document.getElementById('calc-siblings').value);
+                    const isNewStudent = document.getElementById('calc-new').value;
+                    const uniform = document.getElementById('calc-uniform').value;
+                    const earlyPayment = document.getElementById('calc-early').value;
+                    
+                    if (!selectedClass) {
+                        alert('Please select a class first');
+                        return;
+                    }
+                    
+                    // Get base fees
+                    const base = this.fees[selectedClass];
+                    if (!base) return;
+                    
+                    let total = 0;
+                    let breakdown = [];
+                    
+                    // Add admission fee only for new students
+                    if (isNewStudent === 'yes') {
+                        total += base.admission;
+                        breakdown.push(`Admission Fee: UGX ${base.admission.toLocaleString()}`);
+                    }
+                    
+                    // Add development fee (first term only - assuming first term for calculation)
+                    total += base.development;
+                    breakdown.push(`Development Fee: UGX ${base.development.toLocaleString()}`);
+                    
+                    // Add tuition fee
+                    total += base.tuition;
+                    breakdown.push(`Tuition Fee: UGX ${base.tuition.toLocaleString()}`);
+                    
+                    // Add boarding fee if applicable
+                    if (base.boarding > 0) {
+                        total += base.boarding;
+                        breakdown.push(`Boarding Fee: UGX ${base.boarding.toLocaleString()}`);
+                    }
+                    
+                    // Add uniform cost
+                    const uniformCost = this.additional.uniform[uniform];
+                    if (uniformCost > 0) {
+                        total += uniformCost;
+                        breakdown.push(`Uniform: UGX ${uniformCost.toLocaleString()}`);
+                    }
+                    
+                    // Apply sibling discount to tuition only
+                    let tuitionDiscount = 0;
+                    if (siblings > 0 && siblings < 4) {
+                        tuitionDiscount = base.tuition * this.discounts.siblings[siblings];
+                        breakdown.push(`Sibling Discount: -UGX ${tuitionDiscount.toLocaleString()}`);
+                    } else if (siblings >= 3) {
+                        tuitionDiscount = base.tuition * this.discounts.siblings[3];
+                        breakdown.push(`Sibling Discount: -UGX ${tuitionDiscount.toLocaleString()}`);
+                    }
+                    
+                    // Apply early payment discount to total (after sibling discount)
+                    const earlyDiscount = (total - tuitionDiscount) * this.discounts.early[earlyPayment];
+                    if (earlyDiscount > 0) {
+                        breakdown.push(`Early Payment Discount: -UGX ${earlyDiscount.toLocaleString()}`);
+                    }
+                    
+                    // Calculate final total
+                    total = total - tuitionDiscount - earlyDiscount;
+                    
+                    // Display result
+                    document.getElementById('totalAmount').textContent = total.toLocaleString();
+                    document.getElementById('breakdown').innerHTML = breakdown.join('<br>');
+                    document.getElementById('calcResult').style.display = 'block';
+                    
+                    // Scroll to result
+                    document.getElementById('calcResult').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            };
+            
+            // Attach calculate button
+            document.getElementById('calculateBtn').addEventListener('click', () => {
+                feeCalculator.calculate();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Ebenezer Imani Nursery & Primary School</title>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <link rel="stylesheet" href="colors.css">
+    
+    <!-- External Libraries -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/sch logo.jfif" alt="Ebenezer Imani Logo">
+                <div class="school-name">
+                    <h1>Ebenezer Imani</h1>
+                  
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="academics.html"><i class="fas fa-graduation-cap"></i> Academics</a></li>
+                    <li><a href="admissions.html"><i class="fas fa-user-plus"></i> Admissions</a></li>
+                    <li><a href="fees.html"><i class="fas fa-money-check-alt"></i> Fees</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-photo-video"></i> Gallery</a></li>
+                    <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+            <div class="slide active">
+                <div class="slide-content">
+                    <h2>Quality Christian Education</h2>
+                    <p>Nurturing young minds for a brighter future since 2019</p>
+                    <a href="admissions.html" class="btn">Apply Now</a>
+                </div>
+            </div>
+            
+    </section>
+
+    <!-- Quick Info Section -->
+    <section class="quick-info">
+        <div class="container">
+            <div class="info-cards">
+                <div class="card">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>School Calendar</h3>
+                    <p>2026 Term Dates Available</p>
+                    <a href="academics.html#Academic Calendar 2026" class="small-btn">View</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-bell"></i>
+                    <h3>Announcements</h3>
+                    <p>Latest School Updates</p>
+                    <a href="gallery.html#news" class="small-btn">Read More</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-download"></i>
+                    <h3>Downloads</h3>
+                    <p>Forms & Documents</p>
+                    <a href="gallery.html" class="small-btn">View All</a>
+                </div>
+                <div class="card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Location</h3>
+                    <p>Namayiba, Mukono</p>
+                    <a href="contact.html#map" class="small-btn">View Map</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Welcome Message -->
+    <section class="welcome">
+        <div class="container">
+            <div class="welcome-content">
+                <div class="welcome-text">
+                    <h2>Welcome to Ebenezer Imani</h2>
+                    <p>Ebenezer Imani Nursery & Primary School is a Christian-founded institution committed to providing quality education grounded in Christian values. We offer both pre-primary and primary education with a focus on holistic development.</p>
+                    <p>Our motto "Thriving on Unity" reflects our commitment to working together with parents, teachers, and the community to nurture responsible citizens.</p>
+                    <a href="pages/about.html" class="btn">Learn More About Us</a>
+                </div>
+                <div class="welcome-video">
+    <div class="welcome-video">
+    <video width="600" autoplay muted loop playsinline >
+        <source src="images/vcg.mp4" type="video/mp4">
+    </video>
+</div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision Mission Values -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Core Values</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>To be a leading Christian educational institution nurturing holistic development of children for a transformed society.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>To provide quality education grounded in Christian values, academic excellence, and character formation.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Our Motto</h3>
+                    <p>"Thriving on Unity" - We believe in working together with parents, teachers, and community for children's success.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News -->
+    <section class="news-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Latest News & Announcements</h2>
+                <p class="section-subtitle">Stay updated with school activities and important notices</p>
+            </div>
+            <div class="news-grid" id="news-container">
+                <!-- News will be loaded via JavaScript -->
+            </div>
+            <div class="text-center">
+                <a href="pages/news.html" class="btn btn-secondary">View All News & Announcements</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Photo Highlights -->
+    <section class="photo-highlights">
+        <div class="container">
+            <div class="section-title">
+                <h2>Photo Highlights</h2>
+            </div>
+            <div class="photo-grid">
+                <div class="photo-item">
+                    <img src="images/dedication.png" alt="School Assembly">
+                    <div class="photo-caption">Candidates Deidcation Day</div>
+                </div>
+                <div class="photo-item">
+                    <img src="images/class 1.png" alt="Classroom Activity">
+                    <div class="photo-caption">Class Activity</div>
+                </div>
+                <div class="photo-item">
+                    <img src="images/dance 1.jpg" alt="Sports Day">
+                    <div class="photo-caption">Annual MDD</div>
+                </div>
+                <div class="photo-item">
+                    <img src="images/Jinja.JPG" alt="Computer Lab">
+                    <div class="photo-caption">School Tour</div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="gallery.html" class="btn">View Full Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Join Our School Family?</h2>
+                <p>Admissions are open for Nursery and Primary classes. Contact us today for more information.</p>
+                <div class="cta-buttons">
+                    <a href="admissions.html" class="btn">Admission Process</a>
+                    <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <h3>Ebenezer Imani Nursery & Primary School</h3>
+                
+                    <p class="motto">Thriving on Unity</p>
+                </div>
+                <p>A Christian-founded institution offering quality pre-primary and primary education in Mukono, Uganda.</p>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> Namayiba (Katosi Road), Mukono – Uganda</p>
+                    <p><i class="fas fa-phone"></i> 0761288927 / 0777287368 / 0709624986/ 0773012774 </p>
+                    <p><i class="fas fa-envelope"></i> ebenezerimanischool@gmail.com
+</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="assets/docs/prospectus.pdf">School Prospectus</a></li>
+                    <li><a href="assets/docs/calendar.pdf">Academic Calendar</a></li>
+                    <li><a href="assets/docs/policy.pdf">School Policies</a></li>
+                    <li><a href="assets/docs/performance.pdf">Performance Reports</a></li>
+                    <li><a href="assets/docs/parents-guide.pdf">Parents' Guide</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61574139293687" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/ebenezerimani" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="www.youtube.com/@ebenezerimaninurseryandprimary" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/ebenezer_imani/" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/256773012774" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://www.tiktok.com/@ebenezerimanischool?is_from_webapp=1&sender_device=pc" class="social-icon"><i class="fab fa-tiktok"></i></a>
+
+                </div>
+                <div class="newsletter">
+                    <h4>Subscribe to Newsletter</h4>
+                    <form id="newsletter-form">
+                        <input type="email" placeholder="Your email address" required>
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+                <div class="map-link">
+                    <a href="contact.html#map">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>View School Location on Map</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> Ebenezer Imani Nursery & Primary School. All Rights Reserved.</p>
+            <p>P.O. Box 4158, Kampala, Uganda | Designed for ICT Project Assessment</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

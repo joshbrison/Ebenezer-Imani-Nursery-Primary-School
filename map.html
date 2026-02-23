@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location & Map | Ebenezer Imani Nursery & Primary School</title>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="responsive.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS for Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <style>
+        /* Additional styles for location page */
+        .location-hero {
+            background: linear-gradient(rgba(30, 58, 138, 0.9), rgba(30, 58, 138, 0.8)),
+                        url('../images/location-banner.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: var(--spacing-3xl) 0;
+            text-align: center;
+        }
+
+        .location-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        .location-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-2xl);
+            margin-top: var(--spacing-2xl);
+        }
+
+        .location-info {
+            background: white;
+            padding: var(--spacing-2xl);
+            border-radius: var(--border-radius-xl);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .location-details h3 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+            padding: var(--spacing-md);
+            background: var(--background-light);
+            border-radius: var(--border-radius);
+            transition: transform var(--transition);
+        }
+
+        .detail-item:hover {
+            transform: translateX(5px);
+            background: white;
+            box-shadow: var(--shadow);
+        }
+
+        .detail-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            flex-shrink: 0;
+        }
+
+        .detail-content h4 {
+            color: var(--dark-color);
+            margin-bottom: var(--spacing-xs);
+            font-size: 1.1rem;
+        }
+
+        .detail-content p {
+            color: var(--text-color);
+            margin-bottom: 0;
+            line-height: 1.6;
+        }
+
+        .map-container {
+            position: relative;
+            border-radius: var(--border-radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            height: 600px;
+        }
+
+        #schoolMap {
+            width: 100%;
+            height: 100%;
+            border-radius: var(--border-radius-xl);
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: var(--spacing-md);
+            left: var(--spacing-md);
+            background: rgba(255, 255, 255, 0.95);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            max-width: 300px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .map-overlay h4 {
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .map-overlay p {
+            font-size: 0.9rem;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-color);
+        }
+
+        .transportation-section {
+            margin-top: var(--spacing-3xl);
+            background: var(--background-gray);
+            padding: var(--spacing-3xl) 0;
+            border-radius: var(--border-radius-xl);
+        }
+
+        .transport-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-top: var(--spacing-xl);
+        }
+
+        .transport-card {
+            background: white;
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all var(--transition);
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .transport-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-top-color: var(--accent-color);
+        }
+
+        .transport-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .transport-card h4 {
+            color: var(--dark-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .directions-section {
+            margin-top: var(--spacing-3xl);
+        }
+
+        .directions-steps {
+            margin-top: var(--spacing-xl);
+            counter-reset: step-counter;
+        }
+
+        .direction-step {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-lg);
+            background: white;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .direction-step::before {
+            counter-increment: step-counter;
+            content: counter(step-counter);
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.25rem;
+            box-shadow: var(--shadow);
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--background-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            color: var(--dark-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .step-content p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .cta-location {
+            background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
+            color: white;
+            padding: var(--spacing-3xl) 0;
+            text-align: center;
+            margin-top: var(--spacing-3xl);
+            border-radius: var(--border-radius-xl);
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            justify-content: center;
+            margin-top: var(--spacing-xl);
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 992px) {
+            .location-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-container {
+                height: 400px;
+            }
+            
+            .transport-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .direction-step {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--spacing-md);
+            }
+            
+            .step-icon {
+                margin: 0 auto;
+            }
+            
+            .contact-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .contact-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="images/sch logo.jfif" alt="Ebenezer Imani Logo">
+                <div class="school-name">
+                    <h1>Ebenezer Imani</h1>
+                    <p>Nursery & Primary School</p>
+                    <p class="motto">Thriving on Unity</p>
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="academics.html"><i class="fas fa-graduation-cap"></i> Academics</a></li>
+                    <li><a href="admissions.html"><i class="fas fa-user-plus"></i> Admissions</a></li>
+                    <li><a href="fees.html"><i class="fas fa-money-check-alt"></i> Fees</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-photo-video"></i> Gallery</a></li>
+                    <li><a href="contact.html"><i class="fas fa-phone-alt"></i> Contact</a></li>
+                    <li><a href="location.html" class="active"><i class="fas fa-map-marker-alt"></i> Location</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Location Hero Section -->
+    <section class="location-hero">
+        <div class="container">
+            <h1>School Location & Directions</h1>
+            <p>Find your way to Ebenezer Imani Nursery & Primary School</p>
+        </div>
+    </section>
+
+    <!-- Location Content -->
+    <section class="location-section">
+        <div class="location-container">
+            <div class="section-title">
+                <h2>Our Location</h2>
+                <div class="underline"></div>
+                <p class="section-subtitle">Conveniently located in Mukono District with easy access from Kampala</p>
+            </div>
+
+            <div class="location-content">
+                <!-- Location Details -->
+                <div class="location-info">
+                    <div class="location-details">
+                        <h3><i class="fas fa-map-pin"></i> School Address</h3>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-location-dot"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>Physical Location</h4>
+                                <p>Kityabule - Namayiba, 4 kilometers off Katosi Road<br>
+                                Mukono District, Uganda</p>
+                            </div>
+                        </div>
+
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>Postal Address</h4>
+                                <p>P.O. BOX 4158<br>
+                                Kampala, Uganda</p>
+                            </div>
+                        </div>
+
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>School Hours</h4>
+                                <p><strong>Monday - Friday:</strong> 8:00 AM - 5:00 PM<br>
+                                <strong>Saturday:</strong> 8:00 AM - 1:00 PM (Extra-curricular)<br>
+                                <strong>Sunday:</strong> Closed</p>
+                            </div>
+                        </div>
+
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>Contact Numbers</h4>
+                                <p><strong>Office:</strong> 0761288927 / 0777287368<br>
+                                <strong>Mobile:</strong> 0709624986 / 0773012774<br>
+                                <strong>Email:</strong> ebenezerimanischool@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="detail-content">
+                                <h4>GPS Coordinates</h4>
+                                <p><strong>Latitude:</strong> 0.3641° N<br>
+                                <strong>Longitude:</strong> 32.7351° E<br>
+                                <small>Click on map marker for exact coordinates</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Map -->
+                <div class="map-container">
+                    <div id="schoolMap"></div>
+                    <div class="map-overlay">
+                        <h4><i class="fas fa-school"></i> Ebenezer Imani</h4>
+                        <p>Kityabule - Namayiba, Mukono District</p>
+                        <p><i class="fas fa-route"></i> 4km off Katosi Road</p>
+                        <button class="small-btn" onclick="getDirections()">
+                            <i class="fas fa-directions"></i> Get Directions
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transportation Section -->
+    <section class="transportation-section">
+        <div class="location-container">
+            <div class="section-title">
+                <h2>Transportation Options</h2>
+                <div class="underline"></div>
+                <p class="section-subtitle">Various ways to reach our school</p>
+            </div>
+
+            <div class="transport-grid">
+                <div class="transport-card">
+                    <div class="transport-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <h4>Private Vehicle</h4>
+                    <p>Ample parking space available for parents and visitors. Secure parking area with 24/7 security surveillance.</p>
+                </div>
+
+                <div class="transport-card">
+                    <div class="transport-icon">
+                        <i class="fas fa-bus"></i>
+                    </div>
+                    <h4>School Bus Service</h4>
+                    <p>We provide school bus services covering major routes in Mukono and surrounding areas. Contact administration for routes and fees.</p>
+                </div>
+
+                <div class="transport-card">
+                    <div class="transport-icon">
+                        <i class="fas fa-taxi"></i>
+                    </div>
+                    <h4>Public Transport</h4>
+                    <p>Regular taxi and boda-boda services available from Mukono town to Namayiba. Drop-off point is 500m from school.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Directions Section -->
+    <section class="directions-section">
+        <div class="location-container">
+            <div class="section-title">
+                <h2>How to Reach Us</h2>
+                <div class="underline"></div>
+                <p class="section-subtitle">Step-by-step directions from major locations</p>
+            </div>
+
+            <div class="directions-steps">
+                <!-- From Kampala -->
+                <div class="direction-step">
+                    <div class="step-icon">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <div class="step-content">
+                        <h4>From Kampala City Center</h4>
+                        <p>1. Take Jinja Road heading east towards Mukono<br>
+                           2. Continue on Jinja Road for approximately 22km until you reach Mukono town<br>
+                           3. At Mukono roundabout, take Katosi Road (turn right)<br>
+                           4. Drive for 4 kilometers on Katosi Road<br>
+                           5. Look for the school signboard on your left at Kityabule - Namayiba<br>
+                           6. Turn left at the signboard and follow the road for 200m to reach the school</p>
+                    </div>
+                </div>
+
+                <!-- From Jinja -->
+                <div class="direction-step">
+                    <div class="step-icon">
+                        <i class="fas fa-road"></i>
+                    </div>
+                    <div class="step-content">
+                        <h4>From Jinja Town</h4>
+                        <p>1. Take Kampala Road heading west<br>
+                           2. Pass through Lugazi town<br>
+                           3. Continue towards Mukono for approximately 35km<br>
+                           4. When you reach Mukono town, at the roundabout take Katosi Road (turn left)<br>
+                           5. Drive for 4 kilometers on Katosi Road<br>
+                           6. Look for the school signboard on your left at Kityabule - Namayiba<br>
+                           7. Turn left at the signboard to reach the school</p>
+                    </div>
+                </div>
+
+                <!-- From Entebbe Airport -->
+                <div class="direction-step">
+                    <div class="step-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <div class="step-content">
+                        <h4>From Entebbe International Airport</h4>
+                        <p>1. Take Entebbe-Kampala Road to Kampala<br>
+                           2. Once in Kampala, follow signs to Jinja Road<br>
+                           3. Take Jinja Road heading east towards Mukono<br>
+                           4. Continue for 22km to Mukono town<br>
+                           5. At Mukono roundabout, take Katosi Road (turn right)<br>
+                           6. Drive 4km to Kityabule - Namayiba<br>
+                           7. Follow the school signboard to your destination</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-location">
+        <div class="location-container">
+            <h2>Need Help Finding Us?</h2>
+            <p>Our administration team is ready to assist you with directions and transportation information.</p>
+            
+            <div class="contact-buttons">
+                <a href="tel:+256761288927" class="btn">
+                    <i class="fas fa-phone"></i> Call Us Now
+                </a>
+                <a href="contact.html" class="btn btn-secondary">
+                    <i class="fas fa-envelope"></i> Send Message
+                </a>
+                <a href="#schoolMap" class="btn btn-accent">
+                    <i class="fas fa-map"></i> View Map
+                </a>
+            </div>
+            
+            <div class="whatsapp-contact" style="margin-top: var(--spacing-lg);">
+                <a href="https://wa.me/256761288927" class="small-btn" style="background: #25D366; color: white;">
+                    <i class="fab fa-whatsapp"></i> WhatsApp: +256 761 288927
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">
+                    <h3>Ebenezer Imani Nursery & Primary School</h3>
+                    <p class="motto">Thriving on Unity</p>
+                </div>
+                <p>A Christian-founded institution offering quality pre-primary and primary education in Mukono, Uganda.</p>
+                <div class="footer-contact">
+                    <p><i class="fas fa-map-marker-alt"></i> Kityabule - Namayiba, 4km off Katosi Road, Mukono</p>
+                    <p><i class="fas fa-phone"></i> 0761288927 / 0777287368 / 0709624986</p>
+                    <p><i class="fas fa-envelope"></i> ebenezerimanischool@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 8:00 AM - 5:00 PM</p>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="academics.html"><i class="fas fa-chevron-right"></i> Academics</a></li>
+                    <li><a href="admissions.html"><i class="fas fa-chevron-right"></i> Admissions</a></li>
+                    <li><a href="location.html" class="active"><i class="fas fa-chevron-right"></i> Location</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Important Links</h3>
+                <ul class="footer-links">
+                    <li><a href="fees.html"><i class="fas fa-chevron-right"></i> Fees Structure</a></li>
+                    <li><a href="gallery.html"><i class="fas fa-chevron-right"></i> Photo Gallery</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact Us</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> School Calendar</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Download Forms</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://x.com/ebenezerimani" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="www.youtube.com/@ebenezerimaninurseryandprimary" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    <a href="https://www.instagram.com/ebenezer_imani/" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/256761288927" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                </div>
+                <div class="map-link">
+                    <a href="location.html">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span>View Detailed Location & Map</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="current-year"></span> Ebenezer Imani Nursery & Primary School. All Rights Reserved.</p>
+            <p>P.O. Box 4158, Kampala, Uganda | Designed for ICT Project Assessment</p>
+        </div>
+    </footer>
+
+    <!-- Leaflet JS for Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    
+    <script>
+        // Initialize map
+        function initMap() {
+            // School coordinates (approximate location near Mukono)
+            const schoolCoords = [0.3641, 32.7351];
+            
+            // Create map
+            const map = L.map('schoolMap').setView(schoolCoords, 15);
+            
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 18
+            }).addTo(map);
+            
+            // Custom icon for school
+            const schoolIcon = L.divIcon({
+                className: 'school-marker',
+                html: '<i class="fas fa-school" style="color: #dc2626; font-size: 2rem;"></i>',
+                iconSize: [40, 40],
+                iconAnchor: [20, 40],
+                popupAnchor: [0, -40]
+            });
+            
+            // Add marker
+            const marker = L.marker(schoolCoords, { icon: schoolIcon }).addTo(map);
+            
+            // Add popup
+            marker.bindPopup(`
+                <div style="padding: 10px;">
+                    <h4 style="margin: 0 0 10px 0; color: #1e3a8a;">Ebenezer Imani School</h4>
+                    <p style="margin: 0 0 5px 0;"><strong>Location:</strong> Kityabule - Namayiba</p>
+                    <p style="margin: 0 0 5px 0;"><strong>Distance:</strong> 4km off Katosi Road</p>
+                    <p style="margin: 0 0 5px 0;"><strong>Coordinates:</strong> ${schoolCoords[0]}, ${schoolCoords[1]}</p>
+                    <button onclick="getDirections()" style="margin-top: 10px; padding: 5px 10px; background: #1e3a8a; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                        <i class="fas fa-directions"></i> Get Directions
+                    </button>
+                </div>
+            `).openPopup();
+            
+            // Add circle to show approximate location area
+            L.circle(schoolCoords, {
+                color: '#1e3a8a',
+                fillColor: '#1e3a8a',
+                fillOpacity: 0.1,
+                radius: 200
+            }).addTo(map);
+            
+            // Add scale
+            L.control.scale().addTo(map);
+        }
+        
+        // Get directions function
+        function getDirections() {
+            const destination = "0.3641,32.7351"; // School coordinates
+            const url = `https://www.google.com/maps/dir/?api=1&destination=${destination}`;
+            window.open(url, '_blank');
+        }
+        
+        // Initialize map when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initMap();
+            
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            
+            // Mobile navigation toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

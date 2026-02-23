@@ -1,0 +1,679 @@
+/* ==========================================================================
+   COLOR UTILITY CLASSES
+   ========================================================================== */
+
+/* Background Colors */
+.bg-primary {
+    background-color: var(--primary-color) !important;
+    color: white;
+}
+
+.bg-secondary {
+    background-color: var(--secondary-color) !important;
+    color: white;
+}
+
+.bg-accent {
+    background-color: var(--accent-color) !important;
+    color: white;
+}
+
+.bg-light {
+    background-color: var(--light-color) !important;
+    color: var(--dark-color);
+}
+
+.bg-dark {
+    background-color: var(--dark-color) !important;
+    color: white;
+}
+
+.bg-success {
+    background-color: var(--success-color) !important;
+    color: white;
+}
+
+.bg-warning {
+    background-color: var(--warning-color) !important;
+    color: white;
+}
+
+.bg-error {
+    background-color: var(--error-color) !important;
+    color: white;
+}
+
+/* Text Colors */
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.text-secondary {
+    color: var(--secondary-color) !important;
+}
+
+.text-accent {
+    color: var(--accent-color) !important;
+}
+
+.text-light {
+    color: var(--light-color) !important;
+}
+
+.text-dark {
+    color: var(--dark-color) !important;
+}
+
+.text-success {
+    color: var(--success-color) !important;
+}
+
+.text-warning {
+    color: var(--warning-color) !important;
+}
+
+.text-error {
+    color: var(--error-color) !important;
+}
+
+.text-white {
+    color: white !important;
+}
+
+.text-muted {
+    color: #64748b !important;
+    opacity: 0.8;
+}
+
+/* Border Colors */
+.border-primary {
+    border-color: var(--primary-color) !important;
+}
+
+.border-secondary {
+    border-color: var(--secondary-color) !important;
+}
+
+.border-accent {
+    border-color: var(--accent-color) !important;
+}
+
+.border-light {
+    border-color: var(--light-color) !important;
+}
+
+.border-dark {
+    border-color: var(--dark-color) !important;
+}
+
+/* Gradient Backgrounds */
+.gradient-primary {
+    background: linear-gradient(135deg, var(--primary-color), #1e40af) !important;
+    color: white;
+}
+
+.gradient-secondary {
+    background: linear-gradient(135deg, var(--secondary-color), #ef4444) !important;
+    color: white;
+}
+
+.gradient-accent {
+    background: linear-gradient(135deg, var(--accent-color), #d97706) !important;
+    color: white;
+}
+
+.gradient-dark {
+    background: linear-gradient(135deg, var(--dark-color), #0f172a) !important;
+    color: white;
+}
+
+/* Shadow Colors */
+.shadow-primary {
+    box-shadow: 0 4px 6px -1px rgba(30, 58, 138, 0.1), 0 2px 4px -1px rgba(30, 58, 138, 0.06) !important;
+}
+
+.shadow-secondary {
+    box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.1), 0 2px 4px -1px rgba(220, 38, 38, 0.06) !important;
+}
+
+.shadow-accent {
+    box-shadow: 0 4px 6px -1px rgba(245, 158, 11, 0.1), 0 2px 4px -1px rgba(245, 158, 11, 0.06) !important;
+}
+
+/* Color Opacities */
+.bg-primary-10 { background-color: rgba(30, 58, 138, 0.1); }
+.bg-primary-20 { background-color: rgba(30, 58, 138, 0.2); }
+.bg-primary-30 { background-color: rgba(30, 58, 138, 0.3); }
+.bg-primary-40 { background-color: rgba(30, 58, 138, 0.4); }
+.bg-primary-50 { background-color: rgba(30, 58, 138, 0.5); }
+.bg-primary-60 { background-color: rgba(30, 58, 138, 0.6); }
+.bg-primary-70 { background-color: rgba(30, 58, 138, 0.7); }
+.bg-primary-80 { background-color: rgba(30, 58, 138, 0.8); }
+.bg-primary-90 { background-color: rgba(30, 58, 138, 0.9); }
+
+.bg-secondary-10 { background-color: rgba(220, 38, 38, 0.1); }
+.bg-secondary-20 { background-color: rgba(220, 38, 38, 0.2); }
+.bg-secondary-30 { background-color: rgba(220, 38, 38, 0.3); }
+.bg-secondary-40 { background-color: rgba(220, 38, 38, 0.4); }
+.bg-secondary-50 { background-color: rgba(220, 38, 38, 0.5); }
+.bg-secondary-60 { background-color: rgba(220, 38, 38, 0.6); }
+.bg-secondary-70 { background-color: rgba(220, 38, 38, 0.7); }
+.bg-secondary-80 { background-color: rgba(220, 38, 38, 0.8); }
+.bg-secondary-90 { background-color: rgba(220, 38, 38, 0.9); }
+
+.bg-accent-10 { background-color: rgba(245, 158, 11, 0.1); }
+.bg-accent-20 { background-color: rgba(245, 158, 11, 0.2); }
+.bg-accent-30 { background-color: rgba(245, 158, 11, 0.3); }
+.bg-accent-40 { background-color: rgba(245, 158, 11, 0.4); }
+.bg-accent-50 { background-color: rgba(245, 158, 11, 0.5); }
+.bg-accent-60 { background-color: rgba(245, 158, 11, 0.6); }
+.bg-accent-70 { background-color: rgba(245, 158, 11, 0.7); }
+.bg-accent-80 { background-color: rgba(245, 158, 11, 0.8); }
+.bg-accent-90 { background-color: rgba(245, 158, 11, 0.9); }
+
+/* Status Colors */
+.status-active {
+    color: var(--success-color);
+    background-color: rgba(16, 185, 129, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius-sm);
+    display: inline-block;
+}
+
+.status-pending {
+    color: var(--warning-color);
+    background-color: rgba(245, 158, 11, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius-sm);
+    display: inline-block;
+}
+
+.status-inactive {
+    color: var(--error-color);
+    background-color: rgba(239, 68, 68, 0.1);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--border-radius-sm);
+    display: inline-block;
+}
+
+/* Badge Colors */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.badge-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.badge-accent {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.badge-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.badge-warning {
+    background-color: var(--warning-color);
+    color: white;
+}
+
+.badge-error {
+    background-color: var(--error-color);
+    color: white;
+}
+
+/* Alert Colors */
+.alert {
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 1rem;
+    border-left: 4px solid;
+}
+
+.alert-primary {
+    background-color: rgba(30, 58, 138, 0.1);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.alert-secondary {
+    background-color: rgba(220, 38, 38, 0.1);
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.alert-accent {
+    background-color: rgba(245, 158, 11, 0.1);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+}
+
+.alert-success {
+    background-color: rgba(16, 185, 129, 0.1);
+    border-color: var(--success-color);
+    color: var(--success-color);
+}
+
+.alert-warning {
+    background-color: rgba(245, 158, 11, 0.1);
+    border-color: var(--warning-color);
+    color: var(--warning-color);
+}
+
+.alert-error {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: var(--error-color);
+    color: var(--error-color);
+}
+
+/* Progress Bar Colors */
+.progress {
+    background-color: var(--border-color);
+    border-radius: 9999px;
+    overflow: hidden;
+    height: 0.5rem;
+}
+
+.progress-bar {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.3s ease;
+}
+
+.progress-bar-primary {
+    background-color: var(--primary-color);
+}
+
+.progress-bar-secondary {
+    background-color: var(--secondary-color);
+}
+
+.progress-bar-accent {
+    background-color: var(--accent-color);
+}
+
+.progress-bar-success {
+    background-color: var(--success-color);
+}
+
+.progress-bar-warning {
+    background-color: var(--warning-color);
+}
+
+.progress-bar-error {
+    background-color: var(--error-color);
+}
+
+/* Rating Colors */
+.rating-star {
+    color: #e2e8f0;
+}
+
+.rating-star.active {
+    color: var(--accent-color);
+}
+
+.rating-star.half {
+    background: linear-gradient(to right, var(--accent-color) 50%, #e2e8f0 50%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Pricing Tier Colors */
+.pricing-tier-basic {
+    border-color: var(--border-color);
+}
+
+.pricing-tier-standard {
+    border-color: var(--primary-color);
+    border-width: 2px;
+}
+
+.pricing-tier-premium {
+    border-color: var(--accent-color);
+    border-width: 2px;
+}
+
+/* Course Category Colors */
+.category-academic {
+    background-color: rgba(30, 58, 138, 0.1);
+    color: var(--primary-color);
+}
+
+.category-sports {
+    background-color: rgba(220, 38, 38, 0.1);
+    color: var(--secondary-color);
+}
+
+.category-arts {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--accent-color);
+}
+
+.category-community {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+/* Event Type Colors */
+.event-academic {
+    border-left-color: var(--primary-color);
+}
+
+.event-sports {
+    border-left-color: var(--secondary-color);
+}
+
+.event-cultural {
+    border-left-color: var(--accent-color);
+}
+
+.event-holiday {
+    border-left-color: var(--success-color);
+}
+
+/* Level Badge Colors */
+.level-nursery {
+    background-color: #93c5fd;
+    color: #1e40af;
+}
+
+.level-primary {
+    background-color: #86efac;
+    color: #166534;
+}
+
+.level-secondary {
+    background-color: #fcd34d;
+    color: #92400e;
+}
+
+/* House Colors */
+.house-red {
+    background-color: #fecaca;
+    color: #991b1b;
+}
+
+.house-blue {
+    background-color: #bfdbfe;
+    color: #1e40af;
+}
+
+.house-green {
+    background-color: #bbf7d0;
+    color: #166534;
+}
+
+.house-yellow {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* Subject Colors */
+.subject-math {
+    background-color: #93c5fd;
+    color: #1e40af;
+}
+
+.subject-science {
+    background-color: #86efac;
+    color: #166534;
+}
+
+.subject-english {
+    background-color: #fcd34d;
+    color: #92400e;
+}
+
+.subject-cre {
+    background-color: #c7d2fe;
+    color: #3730a3;
+}
+
+.subject-social {
+    background-color: #f9a8d4;
+    color: #9d174d;
+}
+
+/* Priority Colors */
+.priority-high {
+    color: var(--error-color);
+    font-weight: 600;
+}
+
+.priority-medium {
+    color: var(--warning-color);
+    font-weight: 600;
+}
+
+.priority-low {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+/* Attendance Colors */
+.attendance-present {
+    color: var(--success-color);
+}
+
+.attendance-absent {
+    color: var(--error-color);
+}
+
+.attendance-late {
+    color: var(--warning-color);
+}
+
+.attendance-excused {
+    color: var(--text-color);
+    opacity: 0.7;
+}
+
+/* Grade Colors */
+.grade-a {
+    color: var(--success-color);
+    font-weight: 600;
+}
+
+.grade-b {
+    color: #3b82f6;
+    font-weight: 600;
+}
+
+.grade-c {
+    color: var(--warning-color);
+    font-weight: 600;
+}
+
+.grade-d {
+    color: #f97316;
+    font-weight: 600;
+}
+
+.grade-f {
+    color: var(--error-color);
+    font-weight: 600;
+}
+
+/* Achievement Level Colors */
+.achievement-gold {
+    color: #fbbf24;
+    background-color: rgba(251, 191, 36, 0.1);
+}
+
+.achievement-silver {
+    color: #d1d5db;
+    background-color: rgba(209, 213, 219, 0.1);
+}
+
+.achievement-bronze {
+    color: #92400e;
+    background-color: rgba(146, 64, 14, 0.1);
+}
+
+/* Status Indicator Dots */
+.status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.status-dot.online {
+    background-color: var(--success-color);
+}
+
+.status-dot.offline {
+    background-color: var(--error-color);
+}
+
+.status-dot.away {
+    background-color: var(--warning-color);
+}
+
+.status-dot.busy {
+    background-color: #dc2626;
+}
+
+/* Tag Colors */
+.tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.tag-primary {
+    background-color: rgba(30, 58, 138, 0.1);
+    color: var(--primary-color);
+}
+
+.tag-secondary {
+    background-color: rgba(220, 38, 38, 0.1);
+    color: var(--secondary-color);
+}
+
+.tag-accent {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--accent-color);
+}
+
+.tag-success {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--success-color);
+}
+
+/* Hover Effects with Colors */
+.hover-primary:hover {
+    background-color: rgba(30, 58, 138, 0.1);
+    color: var(--primary-color);
+}
+
+.hover-secondary:hover {
+    background-color: rgba(220, 38, 38, 0.1);
+    color: var(--secondary-color);
+}
+
+.hover-accent:hover {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--accent-color);
+}
+
+/* Focus Rings */
+.focus-ring-primary:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+.focus-ring-secondary:focus {
+    outline: 2px solid var(--secondary-color);
+    outline-offset: 2px;
+}
+
+.focus-ring-accent:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+/* Selection Color */
+::selection {
+    background-color: rgba(30, 58, 138, 0.3);
+    color: var(--dark-color);
+}
+
+::-moz-selection {
+    background-color: rgba(30, 58, 138, 0.3);
+    color: var(--dark-color);
+}
+
+/* Scrollbar Colors */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--light-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* Print Color Adjustments */
+@media print {
+    .bg-primary,
+    .bg-secondary,
+    .bg-accent,
+    .bg-success,
+    .bg-warning,
+    .bg-error {
+        background-color: white !important;
+        color: black !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    .text-primary,
+    .text-secondary,
+    .text-accent,
+    .text-success,
+    .text-warning,
+    .text-error {
+        color: black !important;
+    }
+    
+    .badge,
+    .tag,
+    .status-active,
+    .status-pending,
+    .status-inactive {
+        border: 1px solid black;
+        background-color: white !important;
+        color: black !important;
+    }
+}
