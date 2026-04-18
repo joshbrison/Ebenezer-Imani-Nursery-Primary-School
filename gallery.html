@@ -641,54 +641,33 @@
             </div>
 
             <!-- Audio Player for School Songs -->
-            <div class="media-player">
+            <div class="media-player modern-player">
                 <h3><i class="fas fa-music"></i> School Songs & Anthems</h3>
                 <p>Listen to our school anthem, Christian songs, and performances by our school choir.</p>
-                
-                <div class="audio-list">
-                    <div class="audio-item">
-                        <div class="audio-info">
-                            <h4>Ebenezer Imani School School Songs</h4>
-                            <p>Official school Song</p>
-                        </div>
-                        <audio controls>
-                            <source src="images/ebenezer primary imani - ebenezer imani nursery and primary school.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
+                <div class="music-player-ui">
+                    <div class="player-cover">
+                        <i class="fas fa-music"></i>
                     </div>
-                    
-                    <div class="audio-item">
-                        <div class="audio-info">
-                            <h4>Cultural Song</h4>
-                            <p>Empisa - Ebenezer Imaninursery and Primary</p>
-                        </div>
-                        <audio controls>
-                            <source src="images/empisa - ebenezer imani nursery and primary school.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
+                    <div class="player-details">
+                        <div class="song-title" id="songTitle">Ebenezer Imani School Song</div>
+                        <div class="song-artist" id="songArtist">Official School Song</div>
                     </div>
-                    
-                    <div class="audio-item">
-                        <div class="audio-info">
-                            <h4>School Choir Performance</h4>
-                            <p>Choir performance during last year's music festival</p>
-                        </div>
-                        <audio controls>
-                            <source src="images/katambule - ebenezer imani nursery and primary school.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
+                    <div class="player-controls">
+                        <button id="prevBtn" class="player-btn" title="Previous"><i class="fas fa-backward"></i></button>
+                        <button id="playPauseBtn" class="player-btn" title="Play/Pause"><i class="fas fa-play"></i></button>
+                        <button id="nextBtn" class="player-btn" title="Next"><i class="fas fa-forward"></i></button>
                     </div>
-                    
-                    <div class="audio-item">
-                        <div class="audio-info">
-                            <h4>Cultural Songs</h4>
-                            <p>Traditional songs and dances from different tribes</p>
-                        </div>
-                        <audio controls>
-                            <source src="images/ebenezer primary imani - ebenezer imani nursery and primary school.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
+                    <div class="player-progress">
+                        <span id="currentTime">0:00</span>
+                        <input type="range" id="progressBar" value="0" min="0" max="100">
+                        <span id="duration">0:00</span>
                     </div>
+                    <audio id="audioPlayer">
+                        <source src="images/ebenezer primary imani - ebenezer imani nursery and primary school.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+                <div class="playlist" id="playlist">
+                    <!-- Songs will be loaded here by JS -->
                 </div>
             </div>
 

@@ -1,3 +1,156 @@
+// ===== School Songs & Anthems Music Player =====
+document.addEventListener('DOMContentLoaded', function () {
+    // Song data
+    const songs = [
+        {
+            title: 'Ebenezer Imani School Song',
+            artist: 'Official School Song',
+            src: 'images/ebenezer primary imani - ebenezer imani nursery and primary school.mp3',
+        },
+        {
+            title: 'Cultural Song',
+            artist: 'Empisa - Ebenezer Imani Nursery and Primary',
+            src: 'images/empisa - ebenezer imani nursery and primary school.mp3',
+        },
+        {
+            title: 'School Choir Performance',
+            artist: 'Choir performance during last year\'s music festival',
+            src: 'images/katambule - ebenezer imani nursery and primary school.mp3',
+        },
+        {
+            title: 'Cultural Songs',
+            artist: 'Traditional songs and dances from different tribes',
+            src: 'images/ebenezer primary imani - ebenezer imani nursery and primary school.mp3',
+        },
+    ];
+
+    // Player elements
+    const audioPlayer = document.getElementById('audioPlayer');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
+    const songTitle = document.getElementById('songTitle');
+    const songArtist = document.getElementById('songArtist');
+    const currentTimeEl = document.getElementById('currentTime');
+    const durationEl = document.getElementById('duration');
+    const playlistEl = document.getElementById('playlist');
+
+    let currentSong = 0;
+    let isPlaying = false;
+
+    // Load playlist
+    function renderPlaylist() {
+        playlistEl.innerHTML = '';
+        songs.forEach((song, idx) => {
+            const item = document.createElement('div');
+            item.className = 'playlist-item' + (idx === currentSong ? ' active' : '');
+            item.innerHTML = `<span class="playlist-title">${song.title}</span><span class="playlist-artist">${song.artist}</span>`;
+            item.addEventListener('click', () => {
+                loadSong(idx);
+                playSong();
+            });
+            playlistEl.appendChild(item);
+        });
+    }
+
+    // Load song
+    function loadSong(idx) {
+        currentSong = idx;
+        audioPlayer.src = songs[idx].src;
+        songTitle.textContent = songs[idx].title;
+        songArtist.textContent = songs[idx].artist;
+        renderPlaylist();
+        updatePlayPauseIcon();
+    }
+
+    // Play
+    function playSong() {
+        audioPlayer.play();
+        isPlaying = true;
+        updatePlayPauseIcon();
+    }
+
+    // Pause
+    function pauseSong() {
+        audioPlayer.pause();
+        isPlaying = false;
+        updatePlayPauseIcon();
+    }
+
+    // Toggle play/pause
+    function togglePlayPause() {
+        if (isPlaying) {
+            pauseSong();
+        } else {
+            playSong();
+        }
+    }
+
+    // Next song
+    function nextSong() {
+        currentSong = (currentSong + 1) % songs.length;
+        loadSong(currentSong);
+        playSong();
+    }
+
+    // Previous song
+    function prevSong() {
+        currentSong = (currentSong - 1 + songs.length) % songs.length;
+        loadSong(currentSong);
+        playSong();
+    }
+
+    // Update progress bar
+    function updateProgress() {
+        if (!audioPlayer.duration) return;
+        progressBar.value = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+        currentTimeEl.textContent = formatTime(audioPlayer.currentTime);
+        durationEl.textContent = formatTime(audioPlayer.duration);
+    }
+
+    // Seek
+    function seek(e) {
+        if (!audioPlayer.duration) return;
+        const percent = e.target.value;
+        audioPlayer.currentTime = (percent / 100) * audioPlayer.duration;
+    }
+
+    // Format time
+    function formatTime(sec) {
+        const m = Math.floor(sec / 60);
+        const s = Math.floor(sec % 60);
+        return `${m}:${s < 10 ? '0' : ''}${s}`;
+    }
+
+    // Update play/pause icon
+    function updatePlayPauseIcon() {
+        if (isPlaying) {
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        } else {
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        }
+        // Highlight active song in playlist
+        document.querySelectorAll('.playlist-item').forEach((el, idx) => {
+            el.classList.toggle('active', idx === currentSong);
+        });
+    }
+
+    // Event listeners
+    playPauseBtn && playPauseBtn.addEventListener('click', togglePlayPause);
+    nextBtn && nextBtn.addEventListener('click', nextSong);
+    prevBtn && prevBtn.addEventListener('click', prevSong);
+    progressBar && progressBar.addEventListener('input', seek);
+    audioPlayer && audioPlayer.addEventListener('timeupdate', updateProgress);
+    audioPlayer && audioPlayer.addEventListener('ended', nextSong);
+
+    // Initial load
+    if (audioPlayer && playPauseBtn && playlistEl) {
+        loadSong(currentSong);
+        renderPlaylist();
+        updateProgress();
+    }
+});
 // Mobile Navigation Toggle
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
